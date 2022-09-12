@@ -88,9 +88,5 @@ public class RegistroPatentesDiarios {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-
-
-
-
     
 }

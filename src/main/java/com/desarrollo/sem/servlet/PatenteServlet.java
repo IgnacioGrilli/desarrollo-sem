@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import com.desarrollo.sem.models.Patente;
 
 
-
 @Path("/patente")
 public class PatenteServlet {
 
