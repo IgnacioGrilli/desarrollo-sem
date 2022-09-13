@@ -1,9 +1,6 @@
 package com.desarrollo.sem.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 @Entity
 public class UsuarioObleista {
@@ -14,8 +11,8 @@ public class UsuarioObleista {
 
     private String nombre;
 
-
     public UsuarioObleista() {
+        
     }
 
     public int getId() {
@@ -34,7 +31,4 @@ public class UsuarioObleista {
         this.nombre = nombre;
     }
 
-
-
-    
 }
