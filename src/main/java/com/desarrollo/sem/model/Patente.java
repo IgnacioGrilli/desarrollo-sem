@@ -23,8 +23,6 @@ public class Patente {
         this.id = id;
     }
 
-<<<<<<< HEAD:src/main/java/com/desarrollo/sem/model/Patente.java
-=======
     public String getNumero() {
         return numero;
     }
@@ -33,5 +31,4 @@ public class Patente {
         this.numero = numero;
     }
 
->>>>>>> Nacho:src/main/java/com/desarrollo/sem/models/Patente.java
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.desarrollo.sem.models.Patente;
+import com.desarrollo.sem.model.Patente;
 import com.desarrollo.sem.service.PatenteService;
 
 @RequestMapping("patentes")

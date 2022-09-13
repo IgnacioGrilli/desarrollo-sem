@@ -1,4 +1,4 @@
-package com.desarrollo.sem.models;
+package com.desarrollo.sem.model;
 
 import javax.persistence.*;
 

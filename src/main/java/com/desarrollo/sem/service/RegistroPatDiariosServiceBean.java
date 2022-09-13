@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
 
-import com.desarrollo.sem.models.RegistroPatentesDiarios;
+import com.desarrollo.sem.model.RegistroPatentesDiarios;
 
 @Service 
 public class RegistroPatDiariosServiceBean implements RegistroPatDiariosService {

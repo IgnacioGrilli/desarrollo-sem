@@ -2,7 +2,7 @@ package com.desarrollo.sem.service;
 
 import java.util.Collection;
 
-import com.desarrollo.sem.models.RegistroPatentesDiarios;
+import com.desarrollo.sem.model.RegistroPatentesDiarios;
 
 public interface RegistroPatDiariosService {
 

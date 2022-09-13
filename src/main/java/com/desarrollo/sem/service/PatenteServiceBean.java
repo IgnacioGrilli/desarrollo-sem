@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
 
-import com.desarrollo.sem.models.Patente;
+import com.desarrollo.sem.model.Patente;
 
 @Service
 public class PatenteServiceBean implements PatenteService {
