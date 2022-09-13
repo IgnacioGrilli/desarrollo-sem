@@ -23,12 +23,4 @@ public class Patente {
         this.id = id;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
 }
