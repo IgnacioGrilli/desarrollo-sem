@@ -1,36 +1,29 @@
 package com.desarrollo.sem.servlet;
 
-import java.util.Collection;
+import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.desarrollo.sem.models.Patente;
+import com.desarrollo.sem.service.PatenteService;
 
-
-@Path("/patente")
+@RequestMapping("patentes")
+@RestController
 public class PatenteServlet {
 
-    @EJB
     private PatenteService service;
 
-
-    public PatenteServlet() {
+    @Autowired
+    public PatenteServlet(PatenteService service) {
+        this.service = service;
     }
 
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Patente> findAll(){
-        Collection<Patente> data;
-
-        data = service.findAll();
-
-
-        return data;
-
+    @GetMapping("/all")
+    public List<Patente> findAll(){
+        return service.findAll();
     }
-
-    
+   
 }

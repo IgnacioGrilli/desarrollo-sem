@@ -9,10 +9,10 @@ public class Patente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String nacionalidad;
+    private String numero;
 
     public Patente() {
-
+    
     }
 
     public long getId() {
@@ -23,12 +23,12 @@ public class Patente {
         this.id = id;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
 }

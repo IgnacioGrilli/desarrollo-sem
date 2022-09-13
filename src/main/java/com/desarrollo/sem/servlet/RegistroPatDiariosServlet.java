@@ -1,38 +1,29 @@
 package com.desarrollo.sem.servlet;
 
-
-
-
 import java.util.Collection;
 
-import javax.ejb.EJB;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.desarrollo.sem.models.RegistroPatentesDiarios;
+import com.desarrollo.sem.service.RegistroPatDiariosService;
 
-@Path("/RegistroPatDiariosServlet")
+@RequestMapping("registroPatentes")
+@RestController
 public class RegistroPatDiariosServlet {
 
+    private RegistroPatDiariosService service;
 
-    @EJB
-    private RegistroPatDiariosSevice service;
-
-    public RegistroPatDiariosServlet() {
+    @Autowired
+    public RegistroPatDiariosServlet(RegistroPatDiariosService service) {
+        this.service = service;
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @GetMapping("/all")
     public Collection<RegistroPatentesDiarios> findAll(){
-        Collection<RegistroPatentesDiarios> data;
-
-        data = service.findAll();
-
-
-        return data;
-
+        return service.findAll();
     }
     
 }
-
-
