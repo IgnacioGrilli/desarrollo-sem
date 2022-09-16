@@ -39,6 +39,12 @@ public class PatenteServiceBean implements PatenteService {
     }
   }
 
+
+  public Patente create(Patente patente) {
+    em.persist(patente);
+      return patente;
+  }
+
   
 }
     
