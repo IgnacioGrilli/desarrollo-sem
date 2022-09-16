@@ -26,6 +26,12 @@ public class ConductorPatente {
     public ConductorPatente() {
     }
 
+    public ConductorPatente(int id, Patente patente, UsuarioConductor conductor) {
+        this.id = id;
+        this.patente = patente;
+        this.conductor = conductor;
+    }
+
     public int getId() {
         return this.id;
     }
@@ -49,6 +55,17 @@ public class ConductorPatente {
     public void setConductor(UsuarioConductor conductor) {
         this.conductor = conductor;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", patente='" + getPatente() + "'" +
+            ", conductor='" + getConductor() + "'" +
+            "}";
+    }
+
 
 
 

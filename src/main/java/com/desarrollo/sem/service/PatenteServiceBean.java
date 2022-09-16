@@ -27,5 +27,19 @@ public class PatenteServiceBean implements PatenteService {
     }
 
   }
-    
+
+  public Patente findNum(String numero) {
+    try {
+      return em.createQuery(
+        "select e from Patente e where e.numero = :numero", Patente.class)
+        .setParameter("numero", numero)
+        .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+
+  
 }
+    
+  

@@ -7,5 +7,7 @@ import com.desarrollo.sem.model.Patente;
 public interface PatenteService {
 
     public List<Patente> findAll();
+
+    public Patente findNum( String numero);
     
 }

@@ -16,6 +16,10 @@ public class RegistroPatDiariosServlet {
 
     private RegistroPatDiariosService service;
 
+   
+
+
+
     @Autowired
     public RegistroPatDiariosServlet(RegistroPatDiariosService service) {
         this.service = service;
