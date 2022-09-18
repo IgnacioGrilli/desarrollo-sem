@@ -20,38 +20,20 @@ public class ConductorPatenteServlet {
 
     private ConductorPatenteService service;
 
-
-
     @Autowired
     public ConductorPatenteServlet(ConductorPatenteService service) {
         this.service = service;
     }
 
-   /*  @PostMapping("/creaate/{patNum}/{mail}")
-    public ConductorPatente create(@PathVariable String numero, @PathVariable String mail ){
-
-        Patente patente = patenteService.find(numero);
-        UsuarioConductor conductor = serviceConductor.findMail(mail);
-
-        conductorPataux.setConductor(conductor);
-        conductorPataux.setPatente(patente);
-
-        ConductorPatente conductorPat = service.create(conductorPataux);
-        return conductorPat ;
-    }*/
 
     @PostMapping("/create")
     public String create(@RequestBody ConductorPatente conductorPatente ){
         ConductorPatente conductorPat = service.create(conductorPataux); 
-        return conductorPat.toString() ;
+        return conductorPatente.toString() ; //cambiar a conductorPatente
     }
 
     @GetMapping("/all")
     public List<ConductorPatente> findAll(){
         return service.findAll();
     }
-
-
-
-   
 }
