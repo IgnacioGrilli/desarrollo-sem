@@ -16,7 +16,7 @@ import com.desarrollo.sem.service.ConductorPatenteService;
 @RestController
 public class ConductorPatenteServlet {
 
-    ConductorPatente conductorPataux;
+   // ConductorPatente conductorPataux;
 
     private ConductorPatenteService service;
 
@@ -26,10 +26,10 @@ public class ConductorPatenteServlet {
     }
 
 
-    @PostMapping("/create")
-    public String create(@RequestBody ConductorPatente conductorPatente ){
-        ConductorPatente conductorPat = service.create(conductorPataux); 
-        return conductorPatente.toString() ; //cambiar a conductorPatente
+    @PostMapping("/new")
+    public ConductorPatente create(@RequestBody ConductorPatente conductorPatente ){
+       // ConductorPatente conductorPat = service.create(conductorPataux); 
+        return  service.save(conductorPatente) ; //cambiar a conductorPatente
     }
 
     @GetMapping("/all")

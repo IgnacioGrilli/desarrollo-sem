@@ -68,7 +68,7 @@ public class RegistroPatentesDiarios {
         this.patente = patente;
     }
 
-/* 
+
     public Calendar getFecha() {
         return this.fecha;
     }
@@ -77,13 +77,14 @@ public class RegistroPatentesDiarios {
         this.fecha = fecha;
     }
 
-    public Calendar getHora() {
+    public Date getHora() {
         return this.hora;
     }
 
-    public void setHora(Calendar hora) {
+    public void setHora(Date hora) {
         this.hora = hora;
     }
- */
+
+
     
 }
