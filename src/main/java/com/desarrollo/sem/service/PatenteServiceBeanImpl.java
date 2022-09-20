@@ -1,35 +1,17 @@
 package com.desarrollo.sem.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
- import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
- 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.RepositoryDefinition;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import com.desarrollo.sem.model.Patente;
 
-@Service
+//@Service
 public class PatenteServiceBeanImpl   {
 
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  //@PersistenceContext
+ // private EntityManager entityManager;
 
 
-  public Patente findByNum(String numero) {
+/*   public Patente findByNum(String numero) {
     try {
       return entityManager.createQuery(
         "select e from Patente e where e.numero = :numero", Patente.class)
@@ -38,7 +20,7 @@ public class PatenteServiceBeanImpl   {
     } catch (NoResultException e) {
       return null;
     }
-  }
+  } */
 
 
 /* 

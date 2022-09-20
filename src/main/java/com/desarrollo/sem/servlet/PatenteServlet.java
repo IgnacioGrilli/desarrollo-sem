@@ -2,7 +2,7 @@ package com.desarrollo.sem.servlet;
 
 import java.util.List;
 
-import javax.ws.rs.PathParam;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,50 +15,63 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.Patente;
 import com.desarrollo.sem.service.PatenteService;
 
-
 @RestController
 @RequestMapping("patentes")
 public class PatenteServlet {
 
-
     @Autowired
     private PatenteService service;
 
-    
-    /* public PatenteServlet(PatenteService service) {
-        this.service = service;
-    } */
+    /*
+     * public PatenteServlet(PatenteService service) {
+     * this.service = service;
+     * }
+     */
 
-
-   /*  @GetMapping("/{numero}/")
-    public Patente find(@PathVariable String numero){
-        return service.findNum(numero);
-    }
-    
- */
-    /*@GetMapping("/num/{num}")   
-    public Patente findNumPatente(@PathVariable String num){
-        return service.findByNum(num);
-    }*/
+    /*
+     * @GetMapping("/{numero}/")
+     * public Patente find(@PathVariable String numero){
+     * return service.findNum(numero);
+     * }
+     * 
+     */
+    /*
+     * @GetMapping("/num/{num}")
+     * public Patente findNumPatente(@PathVariable String num){
+     * return service.findByNum(num);
+     * }
+     */
 
     @GetMapping("/all")
-    public List<Patente> findAll(){
+    public List<Patente> findAll() {
         return service.findAll();
     }
 
     @PostMapping("/new")
-    public Patente create (@RequestBody Patente patente){
+    public Patente create(@RequestBody Patente patente) {
         return service.save(patente);
     }
 
-   /*  @PostMapping("/create")
-    public String create(@RequestBody Patente patente ){
-        Patente patente2 = service.create(patente); 
-        return patente.toString() ;
-    }
- */
-    
+    @GetMapping("/numero/{numero}")
+    public List<Patente> findByNumero(@PathParam(value = "num1") String num1) {
+        return service.findByNombre(num1);
 
-    
-   
+    }
+
+    @GetMapping("/num/{num2}/")
+    public List<Patente> findByNumeroJpql(@PathParam(value = "num2") String num2) {
+        return service.findByNombreJpql(num2);
+
+    }
+
+
+
+    /*
+     * @PostMapping("/create")
+     * public String create(@RequestBody Patente patente ){
+     * Patente patente2 = service.create(patente);
+     * return patente.toString() ;
+     * }
+     */
+
 }
