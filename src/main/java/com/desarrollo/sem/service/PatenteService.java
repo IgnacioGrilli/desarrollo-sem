@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.desarrollo.sem.model.Patente;
 
 @Repository
-public interface PatenteService extends JpaRepository<Patente, Long> {
+public interface PatenteService extends JpaRepository<Patente, Long>  {
 
   @Query(value = "SELECT p from Patente p WHERE p.numero LIKE %?1%")
   List<Patente> findByNombre( String num);

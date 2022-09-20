@@ -53,13 +53,15 @@ public class PatenteServlet {
     }
 
     @GetMapping("/numero/{numero}")
+
+    //
     public List<Patente> findByNumero(@PathParam(value = "num1") String num1) {
         return service.findByNombre(num1);
 
     }
 
     @GetMapping("/num/{num2}/")
-    public List<Patente> findByNumeroJpql(@PathParam(value = "num2") String num2) {
+    public List<Patente> findByNumeroJpql(@PathVariable String num2) {
         return service.findByNombreJpql(num2);
 
     }
