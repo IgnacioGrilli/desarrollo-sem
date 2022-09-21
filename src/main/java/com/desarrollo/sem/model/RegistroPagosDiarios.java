@@ -3,6 +3,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
+@Entity
 public class RegistroPagosDiarios {
     
 
