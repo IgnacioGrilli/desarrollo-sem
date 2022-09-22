@@ -1,6 +1,11 @@
 package com.desarrollo.sem.model;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class RegistroPatentesDiarios {
@@ -17,17 +22,27 @@ public class RegistroPatentesDiarios {
     @JoinColumn (name="patenteID")
     private Patente patente;
 
-/*
+
     @Temporal (TemporalType.DATE)
     private Calendar fecha;
 
     @Temporal (TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private Calendar hora;
-*/
+    private Date hora;
+
 
     public RegistroPatentesDiarios() {
     }
+
+
+    public RegistroPatentesDiarios(long id, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora) {
+        this.id = id;
+        this.usuarioObleista = usuarioObleista;
+        this.patente = patente;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
 
     public long getId() {
         return this.id;
@@ -53,7 +68,7 @@ public class RegistroPatentesDiarios {
         this.patente = patente;
     }
 
-/* 
+
     public Calendar getFecha() {
         return this.fecha;
     }
@@ -62,13 +77,14 @@ public class RegistroPatentesDiarios {
         this.fecha = fecha;
     }
 
-    public Calendar getHora() {
+    public Date getHora() {
         return this.hora;
     }
 
-    public void setHora(Calendar hora) {
+    public void setHora(Date hora) {
         this.hora = hora;
     }
- */
+
+
     
 }

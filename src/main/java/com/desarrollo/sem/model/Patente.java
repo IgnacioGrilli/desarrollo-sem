@@ -8,11 +8,9 @@ public class Patente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String numero;
 
     public Patente() {
-    
     }
 
     public long getId() {
@@ -30,5 +28,13 @@ public class Patente {
     public void setNumero(String numero) {
         this.numero = numero;
     }
+
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", numero='" + getNumero() + "'" +
+            "}";
+    }
+
 
 }

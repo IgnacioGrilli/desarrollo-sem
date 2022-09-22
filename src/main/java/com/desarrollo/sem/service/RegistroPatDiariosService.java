@@ -1,11 +1,11 @@
 package com.desarrollo.sem.service;
 
-import java.util.Collection;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.desarrollo.sem.model.RegistroPatentesDiarios;
 
-public interface RegistroPatDiariosService {
-
-    public Collection<RegistroPatentesDiarios> findAll();
+@Repository
+public interface RegistroPatDiariosService extends JpaRepository<RegistroPatentesDiarios, Long> {
 
 }
