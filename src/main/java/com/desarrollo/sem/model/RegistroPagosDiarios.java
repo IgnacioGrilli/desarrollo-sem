@@ -6,15 +6,18 @@ import java.util.Date;
 @Entity
 public class RegistroPagosDiarios {
     
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne
+    @JoinColumn (name="obleistaID", nullable=true)
+    private UsuarioObleista usuarioObleista;
+
 
     @ManyToOne
-    @JoinColumn(name="usuarioPagoID")
-    private UsuarioPago usuarioPago;
+    @JoinColumn (name="condPatenteID")
+    private ConductorPatente conductorPatente;
 
 
     @Temporal (TemporalType.TIME)
@@ -41,12 +44,20 @@ public class RegistroPagosDiarios {
         this.id = id;
     }
 
-    public UsuarioPago getUsuarioPago() {
-        return this.usuarioPago;
+    public UsuarioObleista getUsuarioObleista() {
+        return this.usuarioObleista;
     }
 
-    public void setUsuarioPago(UsuarioPago usuarioPago) {
-        this.usuarioPago = usuarioPago;
+    public void setUsuarioObleista(UsuarioObleista usuarioObleista) {
+        this.usuarioObleista = usuarioObleista;
+    }
+
+    public ConductorPatente getConductorPatente() {
+        return this.conductorPatente;
+    }
+
+    public void setConductorPatente(ConductorPatente conductorPatente) {
+        this.conductorPatente = conductorPatente;
     }
 
     public Date getHoraInicio() {

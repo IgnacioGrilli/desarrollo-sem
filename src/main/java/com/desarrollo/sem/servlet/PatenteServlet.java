@@ -22,26 +22,6 @@ public class PatenteServlet {
     @Autowired
     private PatenteService service;
 
-    /*
-     * public PatenteServlet(PatenteService service) {
-     * this.service = service;
-     * }
-     */
-
-    /*
-     * @GetMapping("/{numero}/")
-     * public Patente find(@PathVariable String numero){
-     * return service.findNum(numero);
-     * }
-     * 
-     */
-    /*
-     * @GetMapping("/num/{num}")
-     * public Patente findNumPatente(@PathVariable String num){
-     * return service.findByNum(num);
-     * }
-     */
-
     @GetMapping("/all")
     public List<Patente> findAll() {
         return service.findAll();
@@ -65,15 +45,5 @@ public class PatenteServlet {
         return service.findByNombreJpql(num2);
 
     }
-
-
-
-    /*
-     * @PostMapping("/create")
-     * public String create(@RequestBody Patente patente ){
-     * Patente patente2 = service.create(patente);
-     * return patente.toString() ;
-     * }
-     */
 
 }
