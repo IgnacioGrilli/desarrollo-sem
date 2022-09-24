@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "cuenta")
+/*@Table(name = "cuenta")*/
 public class CuentaCorriente {
 
     @Id
@@ -23,15 +23,10 @@ public class CuentaCorriente {
 
     private long numeroCuenta;
 
-    @OneToMany(mappedBy = "cuenta")
+    @OneToMany(/*mappedBy = "cuenta"*/)
     private Collection<TransaccionesCC> transaccion;
 
-    /*
-     * @OneToMany(mappedBy="bank")
-     * private Set<BankAccount> bankAccounts;
-     */
-
-    @OneToOne(mappedBy = "cuenta")
+    @OneToOne(/*mappedBy = "cuenta"*/)
     private UsuarioConductor conductor;
 
     @Temporal(TemporalType.DATE)

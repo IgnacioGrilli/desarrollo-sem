@@ -33,7 +33,7 @@ public class TransaccionesCC {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date hora;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="CC_id",nullable = false)
     private CuentaCorriente cuenta;
 
