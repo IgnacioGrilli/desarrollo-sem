@@ -8,34 +8,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.desarrollo.sem.model.ConductorPatente;
-import com.desarrollo.sem.service.ConductorPatenteService;
+import com.desarrollo.sem.service.CuentaCorrieteService;
+import com.desarrollo.sem.model.CuentaCorriente;
 
 
 
 @RestController
-@RequestMapping("conductorPatente")
-public class ConductorPatenteServlet {
+@RequestMapping("CuentaCorriente")
+public class CuentaCorreienteServlet {
 
-   // ConductorPatente conductorPataux;
+    @Autowired
+    private CuentaCorrieteService service;
 
-   @Autowired
-    private ConductorPatenteService service;
-
-    /* 
-    public ConductorPatenteServlet(ConductorPatenteService service) {
+   
+ /*    public CuentaCorreienteServlet(CuentaCorrieteService service) {
         this.service = service;
-    } */
-
+    }
+ */
 
     @PostMapping("/new")
-    public ConductorPatente create(@RequestBody ConductorPatente conductorPatente ){
+    public CuentaCorriente create(@RequestBody CuentaCorriente conductorPatente ){
        // ConductorPatente conductorPat = service.create(conductorPataux); 
         return  service.save(conductorPatente) ; //cambiar a conductorPatente
     }
 
     @GetMapping("/all")
-    public List<ConductorPatente> findAll(){
+    public List<CuentaCorriente> findAll(){
         return service.findAll();
     }
+    
 }

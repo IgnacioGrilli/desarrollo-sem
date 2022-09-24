@@ -33,8 +33,6 @@ public class PatenteServlet {
     }
 
     @GetMapping("/numero/{numero}")
-
-    //
     public List<Patente> findByNumero(@PathParam(value = "num1") String num1) {
         return service.findByNombre(num1);
 

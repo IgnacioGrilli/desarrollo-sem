@@ -21,14 +21,4 @@ public interface PatenteService extends JpaRepository<Patente, Long>  {
   )
   List<Patente> findByNombreJpql(String num2);
 
-  // Patente findByNum(String num);
-
-  /*
-   * public List<Patente> findAll();
-   * 
-   * public Patente findNum(String numero);
-   * 
-   * public Patente create(Patente patente);
-   */
-
 }

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.desarrollo.sem.model.UsuarioConductor;
 
-@Service
-public class UsuarioConductorServiceBean implements UsuarioConductorService {
+//@Service
+public class UsuarioConductorServiceBean /*implements UsuarioConductorService */{
 
-  @PersistenceContext
+/*   @PersistenceContext
   protected EntityManager em;
    
 
@@ -28,6 +28,6 @@ public class UsuarioConductorServiceBean implements UsuarioConductorService {
       } catch (NoResultException e) {
         return null;
       }
-  }
+  } */
     
 }

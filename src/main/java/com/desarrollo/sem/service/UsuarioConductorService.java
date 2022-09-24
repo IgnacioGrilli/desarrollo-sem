@@ -1,9 +1,17 @@
 package com.desarrollo.sem.service;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
 import com.desarrollo.sem.model.UsuarioConductor;
 
-public interface UsuarioConductorService {
+@Repository
+public interface UsuarioConductorService extends JpaRepository<UsuarioConductor, Long> {
 
-    public UsuarioConductor findMail(String mail) ;
+    @Query(value = "SELECT p from UsuarioConductor p WHERE p.mail LIKE %?1%")
+    List<UsuarioConductor> findByMail(String num);
 
 }
