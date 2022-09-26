@@ -1,9 +1,6 @@
 package com.desarrollo.sem.servlet;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.swing.event.SwingPropertyChangeSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.CuentaCorriente;
 import com.desarrollo.sem.model.TransaccionesCC;
 import com.desarrollo.sem.model.UsuarioConductor;
-import com.desarrollo.sem.service.CuentaCorrieteService;
+
 import com.desarrollo.sem.service.TransaccionesCCServive;
 import com.desarrollo.sem.service.UsuarioConductorService;
 
@@ -54,14 +51,15 @@ public class UsuarioConductorServlet {
 
         TransaccionesCC trasacAux = null;
         CuentaCorriente cuenta =null;
+        UsuarioConductor conductoraux = findMail(conductor.getMail());
+
         //si el conductor existe (corrobora con el mail)
         if (null != service.findByMail(conductor.getMail())) {
-
-            cuenta = service.findByMail(conductor.getMail()).getCuenta();
+            System.out.println("/ooooooooooooooo"+ findMail(conductor.getMail()).getCuenta());
+            cuenta = conductoraux.getCuenta();
             trasacAux = serviceTransaccion.save(new TransaccionesCC(val, null, null,cuenta));
-            conductor.getCuenta().getTransaccion().add(trasacAux);
-            // Conductor conductorPat = service.create(conductorPataux);
-            return service.save(conductor);
+            cuenta.getTransaccion().add(trasacAux);
+            return service.save(conductoraux);
         }
         //else
         System.out.println("nuloooooooooooo");
