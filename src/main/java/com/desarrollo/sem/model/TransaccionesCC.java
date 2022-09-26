@@ -17,9 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-/* @Embeddable  */
 public class TransaccionesCC {
 
     @Id
@@ -35,6 +35,7 @@ public class TransaccionesCC {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date hora;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="fk_cc",nullable = false,referencedColumnName = "id")
     private CuentaCorriente cuenta;
