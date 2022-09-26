@@ -12,7 +12,7 @@ public class ConductorPatente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne()
     @JoinColumn(name="PATENTE_ID")
@@ -32,13 +32,14 @@ public class ConductorPatente {
         this.conductor = conductor;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
-
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
+
+  
 
     public Patente getPatente() {
         return this.patente;

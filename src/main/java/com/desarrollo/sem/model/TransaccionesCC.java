@@ -5,6 +5,7 @@ package com.desarrollo.sem.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,12 +19,13 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+/* @Embeddable  */
 public class TransaccionesCC {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+ 
     private double montoTransaccion;
 
     @Temporal (TemporalType.DATE)
@@ -33,28 +35,9 @@ public class TransaccionesCC {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date hora;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="CC_id",nullable = false)
+    @ManyToOne
+    @JoinColumn(name="fk_cc",nullable = false,referencedColumnName = "id")
     private CuentaCorriente cuenta;
-
-    /*     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="bank_id", nullable=false)
-    private Bank bank; */
-
-
-    public TransaccionesCC(long id, double montoTransaccion, Calendar fecha, Date hora, CuentaCorriente cuenta) {
-        this.id = id;
-        this.montoTransaccion = montoTransaccion;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.cuenta = cuenta;
-    }
-
-
-    public TransaccionesCC() {
-    }
-
-
 
 
     public long getId() {
@@ -64,6 +47,56 @@ public class TransaccionesCC {
     public void setId(long id) {
         this.id = id;
     }
+
+    public CuentaCorriente getCuenta() {
+        return this.cuenta;
+    }
+
+    public void setCuenta(CuentaCorriente cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    /* @ManyToOne
+    @JoinColumn(name="fk_cc",nullable = false,referencedColumnName = "numeroCuenta")
+    private CuentaCorriente cuenta; */ 
+
+    /* @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="bank_id")
+    private Bank bank; */
+
+
+  /*   public TransaccionesCC(long id, double montoTransaccion, Calendar fecha, Date hora, CuentaCorriente cuenta) {
+        this.id = id;
+        this.montoTransaccion = montoTransaccion;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.cuenta = cuenta;
+    } */
+
+
+    public TransaccionesCC() {
+    }
+
+
+/*     public CuentaCorriente getCuenta() {
+        return this.cuenta;
+    }
+
+    public void setCuenta(CuentaCorriente cuenta) {
+        this.cuenta = cuenta;
+    } */
+
+
+
+
+
+   /*  public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    } */
 
     public double getMontoTransaccion() {
         return this.montoTransaccion;
@@ -89,13 +122,13 @@ public class TransaccionesCC {
         this.hora = hora;
     }
 
-    public CuentaCorriente getCuenta() {
+/*     public CuentaCorriente getCuenta() {
         return this.cuenta;
     }
 
     public void setCuenta(CuentaCorriente cuenta) {
         this.cuenta = cuenta;
-    }
+    } */
 
 
 

@@ -14,4 +14,15 @@ public interface UsuarioConductorService extends JpaRepository<UsuarioConductor,
     @Query(value = "SELECT p from UsuarioConductor p WHERE p.mail LIKE %?1%")
     List<UsuarioConductor> findByMail(String num);
 
+
+    /* select sum(r.monto_transaccion) as saldo
+										from transaccionescc r 
+										join cuenta c
+										on c.id  = r.fk_cc and c.numero_cuenta = 52;
+ */
+
+/* @Query(value = "SELECT * FROM patente WHERE patente.numero like %?1%",
+nativeQuery = true
+)
+long findByNombreSaldo(String num2); */
 }

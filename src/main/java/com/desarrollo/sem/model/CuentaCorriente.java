@@ -1,12 +1,16 @@
 package com.desarrollo.sem.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -14,7 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-/*@Table(name = "cuenta")*/
+@Table(name = "cuenta")
 public class CuentaCorriente {
 
     @Id
@@ -23,18 +27,22 @@ public class CuentaCorriente {
 
     private long numeroCuenta;
 
-    @OneToMany(/*mappedBy = "cuenta"*/)
+    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuenta" )
+    @JoinColumn(name = "transacion", nullable=false,referencedColumnName = "cuenta") */
+
+   /*  @ElementCollection(targetClass=TransaccionesCC.class) */
+    @OneToMany (mappedBy = "cuenta")
     private Collection<TransaccionesCC> transaccion;
 
-    @OneToOne(/*mappedBy = "cuenta"*/)
-    private UsuarioConductor conductor;
+  //  @OneToOne(/*mappedBy = "cuenta"*/)
+   // private UsuarioConductor conductor; 
 
     @Temporal(TemporalType.DATE)
     private Calendar fechaCreacion;
 
     public CuentaCorriente() {
     }
-
+/* 
     public CuentaCorriente(long id, long numeroCuenta, Collection<TransaccionesCC> transaccion,
             UsuarioConductor conductor, Calendar fechaCreacion) {
         this.id = id;
@@ -42,7 +50,7 @@ public class CuentaCorriente {
         this.transaccion = transaccion;
         this.conductor = conductor;
         this.fechaCreacion = fechaCreacion;
-    }
+    } */
 
     public long getNumeroCuenta() {
         return this.numeroCuenta;
@@ -68,13 +76,15 @@ public class CuentaCorriente {
         this.transaccion = transaccion;
     }
 
-    public UsuarioConductor getConductor() {
+  
+
+  /*   public UsuarioConductor getConductor() {
         return this.conductor;
     }
 
     public void setConductor(UsuarioConductor conductor) {
         this.conductor = conductor;
-    }
+    } */
 
     public Calendar getFechaCreacion() {
         return this.fechaCreacion;
@@ -91,10 +101,10 @@ public class CuentaCorriente {
             " id='" + getId() + "'" +
             ", numeroCuenta='" + getNumeroCuenta() + "'" +
             ", transaccion='" + getTransaccion() + "'" +
-            ", conductor='" + getConductor() + "'" +
             ", fechaCreacion='" + getFechaCreacion() + "'" +
             "}";
     }
+
 
 
 }

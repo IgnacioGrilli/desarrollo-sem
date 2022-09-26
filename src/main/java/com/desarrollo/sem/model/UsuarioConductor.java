@@ -17,7 +17,7 @@ public class UsuarioConductor {
 
 
     @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "numero_cuenta", referencedColumnName = "numeroCuenta") 
+    /* @JoinColumn(name = "numero_cuenta", referencedColumnName = "numeroCuenta")  */
     private CuentaCorriente cuenta;
 
     private String mail;
@@ -28,7 +28,7 @@ public class UsuarioConductor {
     public UsuarioConductor() {
     }
 
-
+/* 
     public UsuarioConductor(long id, CuentaCorriente cuenta, String mail, String contraseña, double saldo, int DNI) {
         this.id = id;
         this.cuenta = cuenta;
@@ -36,7 +36,7 @@ public class UsuarioConductor {
         this.contraseña = contraseña;
         this.saldo = saldo;
         this.DNI = DNI;
-    }
+    } */
     
 
     public CuentaCorriente getCuenta() {
