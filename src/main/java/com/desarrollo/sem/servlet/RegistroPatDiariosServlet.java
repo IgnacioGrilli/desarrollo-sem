@@ -33,4 +33,6 @@ public class RegistroPatDiariosServlet {
     public RegistroPatentesDiarios create (@RequestBody RegistroPatentesDiarios registro){
         return service.save(registro);
     }
+
+
 }

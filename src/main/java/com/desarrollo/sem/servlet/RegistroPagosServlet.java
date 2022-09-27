@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.RegistroPagosDiarios;
 import com.desarrollo.sem.service.RegistroPagosService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RequestMapping("registroPagos")
@@ -33,4 +35,11 @@ public class RegistroPagosServlet {
         return service.findAll();
     }
 
+    @PutMapping("/update/{id}")
+    public RegistroPagosDiarios update (@PathVariable long id, @RequestBody RegistroPagosDiarios registro){
+        RegistroPagosDiarios reg = service.findById(id)
+        .orElseThrow();
+        reg.setHoraFin(registro.getHoraFin());
+        return service.save(registro);
+    }
 }
