@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 public class RegistroPagosServlet {
     
+    @Autowired
     private RegistroPagosService service;
 
-    @Autowired
-    public RegistroPagosServlet(RegistroPagosService service) {
+   
+    /* public RegistroPagosServlet(RegistroPagosService service) {
         this.service = service;
-    }
+    } */
     
     @PostMapping("/new")
     public RegistroPagosDiarios create(@RequestBody RegistroPagosDiarios registroPago ){
@@ -37,9 +38,8 @@ public class RegistroPagosServlet {
 
     @PutMapping("/update/{id}")
     public RegistroPagosDiarios update (@PathVariable long id, @RequestBody RegistroPagosDiarios registro){
-        RegistroPagosDiarios reg = service.findById(id)
-        .orElseThrow();
+        RegistroPagosDiarios reg = service.findById(id).orElseThrow();
         reg.setHoraFin(registro.getHoraFin());
-        return service.save(registro);
+        return service.save(reg);
     }
 }

@@ -55,7 +55,7 @@ public class UsuarioConductorServlet {
 
         //si el conductor existe (corrobora con el mail)
         if (null != service.findByMail(conductor.getMail())) {
-            System.out.println("/ooooooooooooooo"+ findMail(conductor.getMail()).getCuenta());
+            //System.out.println("/ooooooooooooooo"+ findMail(conductor.getMail()).getCuenta());
             cuenta = conductoraux.getCuenta();
             trasacAux = serviceTransaccion.save(new TransaccionesCC(val, null, null,cuenta));
             cuenta.getTransaccion().add(trasacAux);
