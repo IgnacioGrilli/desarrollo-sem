@@ -1,37 +1,44 @@
 package com.desarrollo.sem.model;
+
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 @Entity
 public class RegistroPagosDiarios {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @JoinColumn (name="obleistaID", nullable=true)
+    @JoinColumn(name = "obleista_id", nullable = true)
     private UsuarioObleista usuarioObleista;
 
+    /*
+     * @ManyToOne
+     * 
+     * @JoinColumn (name="condPatenteID")
+     * private ConductorPatente conductorPatente;
+     */
 
     @ManyToOne
-    @JoinColumn (name="condPatenteID")
-    private ConductorPatente conductorPatente;
+    @JoinColumn(name = "patente_id", nullable = false)
+    private Patente patente;
 
+    @ManyToOne
+    @JoinColumn(name = "conductor_id", nullable = true)
+    private UsuarioConductor conductor;
 
-    @Temporal (TemporalType.TIME)
+    @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date horaInicio;
 
-
-    @Temporal (TemporalType.TIME)
+    @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date horaFin;
 
-
     private int valor;
-
 
     public RegistroPagosDiarios() {
     }
@@ -52,13 +59,15 @@ public class RegistroPagosDiarios {
         this.usuarioObleista = usuarioObleista;
     }
 
-    public ConductorPatente getConductorPatente() {
-        return this.conductorPatente;
-    }
-
-    public void setConductorPatente(ConductorPatente conductorPatente) {
-        this.conductorPatente = conductorPatente;
-    }
+    /*
+     * public ConductorPatente getConductorPatente() {
+     * return this.conductorPatente;
+     * }
+     * 
+     * public void setConductorPatente(ConductorPatente conductorPatente) {
+     * this.conductorPatente = conductorPatente;
+     * }
+     */
 
     public Date getHoraInicio() {
         return this.horaInicio;
@@ -84,5 +93,6 @@ public class RegistroPagosDiarios {
         this.valor = valor;
     }
 
+    
 
 }

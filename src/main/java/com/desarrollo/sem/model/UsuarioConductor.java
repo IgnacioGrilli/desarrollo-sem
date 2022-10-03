@@ -1,10 +1,9 @@
 package com.desarrollo.sem.model;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -14,8 +13,8 @@ public class UsuarioConductor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private CuentaCorriente cuenta;
+    /* @OneToMany
+    private TransaccionesCC transacciones; */
 
     private String mail;
     private String contraseña;
@@ -24,15 +23,6 @@ public class UsuarioConductor {
 
     public UsuarioConductor() {
     }
-
-    public CuentaCorriente getCuenta() {
-        return this.cuenta;
-    }
-
-    public void setCuenta(CuentaCorriente cuenta) {
-        this.cuenta = cuenta;
-    }
-
     public String getMail() {
         return this.mail;
     }
@@ -77,7 +67,6 @@ public class UsuarioConductor {
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
-                ", cuenta='" + getCuenta() + "'" +
                 ", mail='" + getMail() + "'" +
                 ", contraseña='" + getContraseña() + "'" +
                 ", saldo='" + getSaldo() + "'" +

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.desarrollo.sem.model.CuentaCorriente;
+//import com.desarrollo.sem.model.CuentaCorriente;
 import com.desarrollo.sem.model.TransaccionesCC;
 import com.desarrollo.sem.model.UsuarioConductor;
 
@@ -39,14 +39,22 @@ public class UsuarioConductorServlet {
         return service.findByMail(mail);
     }
 
-    @GetMapping("/calculoSaldoMail/{val}")
+ /*    @GetMapping("/calculoSaldoMail/{val}")
     public List<Double> findSaldoUsua(@PathVariable String val) {
         long idCuenta = service.findByMail(val).getCuenta().getId();
         System.out.println("////////////////////////" + idCuenta);
         return service.findBySaldo(idCuenta);
-    }
+    } */
 
-    @PutMapping("/newMovimiento/{val}")
+
+    @GetMapping("/calculoSaldoMail/{val}")
+    public List<Double> findSaldoUsua(@PathVariable String val) {
+        long idCuenta = service.findByMail(val).getId();
+        System.out.println("////////////////////////" + idCuenta);
+        return service.findBySaldo(idCuenta);
+    } 
+
+  /*   @PutMapping("/newMovimiento/{val}")
     public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor conductor, @PathVariable Double val) {
 
         TransaccionesCC trasacAux = null;
@@ -64,6 +72,26 @@ public class UsuarioConductorServlet {
         //else
         System.out.println("nuloooooooooooo");
         return null;
-    }
+    } */
+
+    @PutMapping("/newMovimiento/{val}")
+    public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor conductor, @PathVariable Double val) {
+
+      
+        //CuentaCorriente cuenta =null;
+        UsuarioConductor conductoraux = findMail(conductor.getMail());
+
+        //si el conductor existe (corrobora con el mail)
+        if (null != service.findByMail(conductor.getMail())) {
+            //guar la nueva transaccion
+            serviceTransaccion.save(new TransaccionesCC(val, null, null,conductoraux));
+
+            //retorna usuarioConductor con todas las transacciones
+            return service.save(conductoraux);
+        }
+        //else
+        System.out.println("nuloooooooooooo");
+        return null;
+    } 
 
 }

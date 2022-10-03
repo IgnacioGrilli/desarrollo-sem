@@ -37,5 +37,6 @@ public class ConductorPatenteServlet {
     @GetMapping("/all")
     public List<ConductorPatente> findAll(){
         return service.findAll();
+        
     }
 }
