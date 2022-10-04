@@ -27,8 +27,6 @@ public class UsuarioConductorServlet {
     @Autowired
     private TransaccionesCCServive serviceTransaccion;
 
-   
-
     @GetMapping("/all")
     public List<UsuarioConductor> findAll() {
         return service.findAll();
@@ -39,59 +37,67 @@ public class UsuarioConductorServlet {
         return service.findByMail(mail);
     }
 
- /*    @GetMapping("/calculoSaldoMail/{val}")
-    public List<Double> findSaldoUsua(@PathVariable String val) {
-        long idCuenta = service.findByMail(val).getCuenta().getId();
-        System.out.println("////////////////////////" + idCuenta);
-        return service.findBySaldo(idCuenta);
-    } */
-
+    /*
+     * @GetMapping("/calculoSaldoMail/{val}")
+     * public List<Double> findSaldoUsua(@PathVariable String val) {
+     * long idCuenta = service.findByMail(val).getCuenta().getId();
+     * System.out.println("////////////////////////" + idCuenta);
+     * return service.findBySaldo(idCuenta);
+     * }
+     */
 
     @GetMapping("/calculoSaldoMail/{val}")
     public List<Double> findSaldoUsua(@PathVariable String val) {
         long idCuenta = service.findByMail(val).getId();
         System.out.println("////////////////////////" + idCuenta);
         return service.findBySaldo(idCuenta);
-    } 
+    }
 
-  /*   @PutMapping("/newMovimiento/{val}")
-    public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor conductor, @PathVariable Double val) {
-
-        TransaccionesCC trasacAux = null;
-        CuentaCorriente cuenta =null;
-        UsuarioConductor conductoraux = findMail(conductor.getMail());
-
-        //si el conductor existe (corrobora con el mail)
-        if (null != service.findByMail(conductor.getMail())) {
-            System.out.println("/ooooooooooooooo"+ findMail(conductor.getMail()).getCuenta());
-            cuenta = conductoraux.getCuenta();
-            trasacAux = serviceTransaccion.save(new TransaccionesCC(val, null, null,cuenta));
-            cuenta.getTransaccion().add(trasacAux);
-            return service.save(conductoraux);
-        }
-        //else
-        System.out.println("nuloooooooooooo");
-        return null;
-    } */
+    /*
+     * @PutMapping("/newMovimiento/{val}")
+     * public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor
+     * conductor, @PathVariable Double val) {
+     * 
+     * TransaccionesCC trasacAux = null;
+     * CuentaCorriente cuenta =null;
+     * UsuarioConductor conductoraux = findMail(conductor.getMail());
+     * 
+     * //si el conductor existe (corrobora con el mail)
+     * if (null != service.findByMail(conductor.getMail())) {
+     * System.out.println("/ooooooooooooooo"+
+     * findMail(conductor.getMail()).getCuenta());
+     * cuenta = conductoraux.getCuenta();
+     * trasacAux = serviceTransaccion.save(new TransaccionesCC(val, null,
+     * null,cuenta));
+     * cuenta.getTransaccion().add(trasacAux);
+     * return service.save(conductoraux);
+     * }
+     * //else
+     * System.out.println("nuloooooooooooo");
+     * return null;
+     * }
+     */
 
     @PutMapping("/newMovimiento/{val}")
-    public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor conductor, @PathVariable Double val) {
+    public String newMovimiento(@RequestBody UsuarioConductor conductor, @PathVariable Double val) {
 
-      
-        //CuentaCorriente cuenta =null;
         UsuarioConductor conductoraux = findMail(conductor.getMail());
 
-        //si el conductor existe (corrobora con el mail)
+        // si el conductor existe (corrobora con el mail)
         if (null != service.findByMail(conductor.getMail())) {
-            //guar la nueva transaccion
-            serviceTransaccion.save(new TransaccionesCC(val, null, null,conductoraux));
+            // guar la nueva transaccion
+            serviceTransaccion.save(new TransaccionesCC(val, null, null, conductoraux));
 
-            //retorna usuarioConductor con todas las transacciones
-            return service.save(conductoraux);
+            // actualiza el saldo del usuario
+            conductoraux.setSaldo(findSaldoUsua(conductor.getMail()).get(0));
+            // System.out.println(findSaldoUsua(conductor.getMail()).get(0));
+
+            // retorna usuarioConductor con todas las transacciones
+            service.save(conductoraux);
+            return "nuevo movimiento registrado";
         }
-        //else
-        System.out.println("nuloooooooooooo");
-        return null;
-    } 
+        // else
+        return "ERROR (usuario no registrado)" ;
+    }
 
 }

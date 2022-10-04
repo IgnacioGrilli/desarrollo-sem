@@ -2,6 +2,8 @@ package com.desarrollo.sem.model;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -26,6 +28,9 @@ public class RegistroPagosDiarios {
     @JoinColumn(name = "patente_id", nullable = false)
     private Patente patente;
 
+    @Temporal (TemporalType.DATE)
+    private Calendar fecha;
+
     @ManyToOne
     @JoinColumn(name = "conductor_id", nullable = true)
     private UsuarioConductor conductor;
@@ -49,6 +54,31 @@ public class RegistroPagosDiarios {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+
+    public Patente getPatente() {
+        return this.patente;
+    }
+
+    public void setPatente(Patente patente) {
+        this.patente = patente;
+    }
+
+    public Calendar getFecha() {
+        return this.fecha;
+    }
+
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
+    }
+
+    public UsuarioConductor getConductor() {
+        return this.conductor;
+    }
+
+    public void setConductor(UsuarioConductor conductor) {
+        this.conductor = conductor;
     }
 
     public UsuarioObleista getUsuarioObleista() {
