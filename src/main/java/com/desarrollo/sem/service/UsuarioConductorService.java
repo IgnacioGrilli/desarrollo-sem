@@ -20,8 +20,14 @@ public interface UsuarioConductorService extends JpaRepository<UsuarioConductor,
     List<Double> findBySaldo(long idCuenta); NO FUNSIONA */
 
     
-     @Query(value =
+     /* @Query(value =
       "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.fk_cc = :idCuenta "
+     , nativeQuery = true)
+      List<Double> findBySaldo(@Param("idCuenta")long idCuenta); */
+
+
+      @Query(value =
+      "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.usuario_id = :idCuenta "
      , nativeQuery = true)
       List<Double> findBySaldo(@Param("idCuenta")long idCuenta);
     

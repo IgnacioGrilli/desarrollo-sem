@@ -43,3 +43,5 @@ public class RegistroPagosServlet {
         return service.save(reg);
     }
 }
+
+    

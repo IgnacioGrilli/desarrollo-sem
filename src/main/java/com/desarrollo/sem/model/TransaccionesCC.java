@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class TransaccionesCC {
@@ -32,20 +32,13 @@ public class TransaccionesCC {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date hora;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "fk_cc", nullable = false, referencedColumnName = "id")
-    private CuentaCorriente cuenta;
+    @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
+    private UsuarioConductor cuenta;
 
 
-    public TransaccionesCC(double montoTransaccion, Calendar fecha, Date hora) {
-        this.montoTransaccion = montoTransaccion;
-        this.fecha = fecha;
-        this.hora = hora;
-    }
-
-
-    public TransaccionesCC(double montoTransaccion, Calendar fecha, Date hora, CuentaCorriente cuenta) {
+    public TransaccionesCC( double montoTransaccion, Calendar fecha, Date hora, UsuarioConductor cuenta) {
         this.montoTransaccion = montoTransaccion;
         this.fecha = fecha;
         this.hora = hora;
@@ -53,7 +46,12 @@ public class TransaccionesCC {
     }
 
 
-
+    public TransaccionesCC(long id, double montoTransaccion, Calendar fecha, Date hora) {
+        this.id = id;
+        this.montoTransaccion = montoTransaccion;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
 
     public long getId() {
         return this.id;
@@ -63,13 +61,15 @@ public class TransaccionesCC {
         this.id = id;
     }
 
-    public CuentaCorriente getCuenta() {
-        return this.cuenta;
-    }
-
-    public void setCuenta(CuentaCorriente cuenta) {
-        this.cuenta = cuenta;
-    }
+    /*
+     * public CuentaCorriente getCuenta() {
+     * return this.cuenta;
+     * }
+     * 
+     * public void setCuenta(CuentaCorriente cuenta) {
+     * this.cuenta = cuenta;
+     * }
+     */
 
     public TransaccionesCC() {
     }
