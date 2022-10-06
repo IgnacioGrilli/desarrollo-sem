@@ -1,6 +1,6 @@
 package com.desarrollo.sem.service;
 
-import java.util.List;
+import java.util.Calendar;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,8 +27,8 @@ public interface UsuarioConductorService extends JpaRepository<UsuarioConductor,
 
 
       @Query(value =
-      "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.usuario_id = :idCuenta "
+      "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.usuario_id = :idCuenta AND transaccionescc.fecha <= :fecha"
      , nativeQuery = true)
-      List<Double> findBySaldo(@Param("idCuenta")long idCuenta);
+      Double findBySaldo(@Param("idCuenta")long idCuenta, @Param("fecha") Calendar fecha);
     
 }

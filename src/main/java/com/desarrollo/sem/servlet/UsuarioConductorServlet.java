@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.desarrollo.sem.model.CuentaCorriente;
 import com.desarrollo.sem.model.TransaccionesCC;
 import com.desarrollo.sem.model.UsuarioConductor;
-
+import java.util.Date;
+import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import com.desarrollo.sem.service.TransaccionesCCServive;
 import com.desarrollo.sem.service.UsuarioConductorService;
 
@@ -46,11 +48,32 @@ public class UsuarioConductorServlet {
      * }
      */
 
-    @GetMapping("/calculoSaldoMail/{val}")
-    public List<Double> findSaldoUsua(@PathVariable String val) {
-        long idCuenta = service.findByMail(val).getId();
-        System.out.println("////////////////////////" + idCuenta);
-        return service.findBySaldo(idCuenta);
+    @GetMapping("/calculoSaldoMail/{mail}/{fecha}")
+    public String findSaldoUsua(@PathVariable String mail, @PathVariable String fecha) {
+        long idCuenta = service.findByMail(mail).getId();
+
+        // pasa el String a un Calendar
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String data;
+
+        try {
+
+            Calendar cal = Calendar.getInstance();
+            Date date;
+            date = df.parse(fecha);
+            cal.setTime(date);
+
+            data = "El saldo de " + mail + " a la fecha " + fecha + " es de: " + String.valueOf(service.findBySaldo(idCuenta, cal));
+        } catch (ParseException p) {
+            return ResponseMessage
+                    .message(502, "No se pudo dar formato a la fecha", p.getMessage());
+        }
+
+        return ResponseMessage.message(
+            200,
+            "Saldo calculado con éxito",
+            data);
+
     }
 
     /*
@@ -85,11 +108,13 @@ public class UsuarioConductorServlet {
 
         // si el conductor existe (corrobora con el mail)
         if (null != service.findByMail(conductor.getMail())) {
-            // guar la nueva transaccion
-            serviceTransaccion.save(new TransaccionesCC(val, null, null, conductoraux));
+            // guarda la nueva transaccion
+
+            serviceTransaccion.save(new TransaccionesCC(val, Calendar.getInstance(), null, conductoraux));
 
             // actualiza el saldo del usuario
-            conductoraux.setSaldo(findSaldoUsua(conductor.getMail()).get(0));
+            // -----------------------------------------------------------
+            // conductoraux.setSaldo(findSaldoUsua(conductor.getMail()).get(0));
             // System.out.println(findSaldoUsua(conductor.getMail()).get(0));
 
             // retorna usuarioConductor con todas las transacciones
@@ -97,7 +122,7 @@ public class UsuarioConductorServlet {
             return "nuevo movimiento registrado";
         }
         // else
-        return "ERROR (usuario no registrado)" ;
+        return "ERROR (usuario no registrado)";
     }
 
 }
