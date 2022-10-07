@@ -110,7 +110,7 @@ public class UsuarioConductorServlet {
         if (null != service.findByMail(conductor.getMail())) {
             // guarda la nueva transaccion
 
-            serviceTransaccion.save(new TransaccionesCC(val, Calendar.getInstance(), null, conductoraux));
+            serviceTransaccion.save(new TransaccionesCC(val, Calendar.getInstance(), Calendar.getInstance().getTime(), conductoraux));
 
             // actualiza el saldo del usuario
             // -----------------------------------------------------------
