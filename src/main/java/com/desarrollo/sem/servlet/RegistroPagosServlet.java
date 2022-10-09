@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.RegistroPagosDiarios;
 import com.desarrollo.sem.service.RegistroPagosService;
+import com.desarrollo.sem.service.ValorMinutoService;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -20,6 +22,9 @@ public class RegistroPagosServlet {
     
     @Autowired
     private RegistroPagosService service;
+
+    @Autowired
+    private ValorMinutoService valService;
 
    
     /* public RegistroPagosServlet(RegistroPagosService service) {
@@ -42,6 +47,25 @@ public class RegistroPagosServlet {
         reg.setHoraFin(registro.getHoraFin());
         return service.save(reg);
     }
+
+    @GetMapping("/minTotales/{id}") 
+    public int minutos(@PathVariable long id) {
+        RegistroPagosDiarios reg = service.findById(id).orElseThrow();
+
+        Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
+
+        return min.intValue();
+    }   
+
+    @PutMapping("/valor/{id}")
+    public long valor(@PathVariable long id) {
+        RegistroPagosDiarios reg = service.findById(id).orElseThrow();
+    
+        reg.setValor(minutos(id) * valService.valorActual().getValor()); 
+        service.save(reg);
+        
+        return reg.getValor();
+    }     
 }
 
     
