@@ -32,6 +32,7 @@ public class RegistroPatentesDiarios {
 
 
     public RegistroPatentesDiarios() {
+
     }
 
 
@@ -42,7 +43,6 @@ public class RegistroPatentesDiarios {
         this.fecha = fecha;
         this.hora = hora;
     }
-
 
     public long getId() {
         return this.id;
@@ -84,7 +84,5 @@ public class RegistroPatentesDiarios {
     public void setHora(Date hora) {
         this.hora = hora;
     }
-
-
     
 }

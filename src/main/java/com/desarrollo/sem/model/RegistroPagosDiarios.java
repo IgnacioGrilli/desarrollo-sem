@@ -17,13 +17,6 @@ public class RegistroPagosDiarios {
     @JoinColumn(name = "obleista_id", nullable = true)
     private UsuarioObleista usuarioObleista;
 
-    /*
-     * @ManyToOne
-     * 
-     * @JoinColumn (name="condPatenteID")
-     * private ConductorPatente conductorPatente;
-     */
-
     @ManyToOne
     @JoinColumn(name = "patente_id", nullable = false)
     private Patente patente;
