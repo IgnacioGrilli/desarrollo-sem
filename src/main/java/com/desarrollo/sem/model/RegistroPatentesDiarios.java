@@ -27,7 +27,7 @@ public class RegistroPatentesDiarios {
     private Calendar fecha;
 
     @Temporal (TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date hora;
 
 

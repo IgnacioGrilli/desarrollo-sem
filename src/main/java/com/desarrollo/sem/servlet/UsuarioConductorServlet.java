@@ -3,8 +3,10 @@ package com.desarrollo.sem.servlet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,9 @@ import com.desarrollo.sem.model.TransaccionesCC;
 import com.desarrollo.sem.model.UsuarioConductor;
 import java.util.Date;
 import java.util.Calendar;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.desarrollo.sem.service.TransaccionesCCServive;
@@ -63,16 +68,17 @@ public class UsuarioConductorServlet {
             date = df.parse(fecha);
             cal.setTime(date);
 
-            data = "El saldo de " + mail + " a la fecha " + fecha + " es de: " + String.valueOf(service.findBySaldo(idCuenta, cal));
+            data = "El saldo de " + mail + " a la fecha " + fecha + " es de: "
+                    + String.valueOf(service.findBySaldo(idCuenta, cal));
         } catch (ParseException p) {
             return ResponseMessage
                     .message(502, "No se pudo dar formato a la fecha", p.getMessage());
         }
 
         return ResponseMessage.message(
-            200,
-            "Saldo calculado con éxito",
-            data);
+                200,
+                "Saldo calculado con éxito",
+                data);
 
     }
 
@@ -110,7 +116,8 @@ public class UsuarioConductorServlet {
         if (null != service.findByMail(conductor.getMail())) {
             // guarda la nueva transaccion
 
-            serviceTransaccion.save(new TransaccionesCC(val, Calendar.getInstance(), Calendar.getInstance().getTime(), conductoraux));
+            serviceTransaccion.save(
+                    new TransaccionesCC(val, Calendar.getInstance(), Calendar.getInstance().getTime(), conductoraux));
 
             // actualiza el saldo del usuario
             // -----------------------------------------------------------
@@ -125,4 +132,55 @@ public class UsuarioConductorServlet {
         return "ERROR (usuario no registrado)";
     }
 
+     @PutMapping("/new")
+    public String newUsuario(@RequestBody UsuarioConductor conductor) {
+        String pass = conductor.getContraseña();
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+
+            byte[] encodedhash = digest.digest(
+                    pass.getBytes(StandardCharsets.UTF_8));
+
+            conductor.setContraseña(bytesToHex(encodedhash));
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        service.save(conductor);
+
+        return conductor.toString();
+    } 
+    /* @PutMapping("/new")
+    public String newUsuario(@RequestBody UsuarioConductor conductor) {
+        String pass = conductor.getContraseña();
+        PasswordEncoder encoder;
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+
+            byte[] encodedhash = digest.digest(
+                    pass.getBytes(StandardCharsets.UTF_8));
+
+            conductor.setContraseña(bytesToHex(encodedhash));
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        service.save(conductor);
+
+        return conductor.toString();
+    } */
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 }
