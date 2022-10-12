@@ -132,7 +132,7 @@ public class UsuarioConductorServlet {
         return "ERROR (usuario no registrado)";
     }
 
-     @PutMapping("/new")
+    @PutMapping("/new")
     public String newUsuario(@RequestBody UsuarioConductor conductor) {
         String pass = conductor.getContraseña();
         MessageDigest digest;
@@ -144,7 +144,6 @@ public class UsuarioConductorServlet {
 
             conductor.setContraseña(bytesToHex(encodedhash));
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         service.save(conductor);
