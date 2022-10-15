@@ -2,7 +2,7 @@ package com.desarrollo.sem.servlet;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,7 @@ import com.desarrollo.sem.service.PatenteService;
 @RequestMapping("patentes")
 public class PatenteServlet {
 
+   
     @Autowired
     private PatenteService service;
 
@@ -32,9 +33,9 @@ public class PatenteServlet {
         return service.save(patente);
     }
 
-    @GetMapping("/numero/{numero}")
-    public List<Patente> findByNumero(@PathParam(value = "num1") String num1) {
-        return service.findByNombre(num1);
+    @GetMapping("/numero/{num2}")
+    public List<Patente> findByNumero(@PathVariable String num2) {
+        return service.findByNombre(num2);
 
     }
 

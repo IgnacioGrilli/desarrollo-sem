@@ -12,14 +12,9 @@ import com.desarrollo.sem.model.TransaccionesCC;
 @Repository
 public interface TransaccionesCCServive extends JpaRepository<TransaccionesCC, Long> {
 
-  // TransaccionesCC save(TransaccionesCC transaccionesCC,
-  // Optional<CuentaCorriente> cuenta);
-
-  @Query(value = "SELECT p from TransaccionesCC p")
-  List<TransaccionesCC> find();
-
+  //busca las transacciones de un usuario 
   @Query(value = "SELECT p FROM TransaccionesCC p WHERE p.cuenta.mail = ?1")
-  List<TransaccionesCC> getTransaccionesUsuario(String num2);
+  List<TransaccionesCC> getTransaccionesUsuario(String mail);
 
 
 }
