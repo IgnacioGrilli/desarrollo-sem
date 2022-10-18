@@ -3,7 +3,6 @@ package com.desarrollo.sem.model;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class TransaccionesCC {
     private Date hora;
 
     //@JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
     private UsuarioConductor cuenta;
 
@@ -58,19 +57,19 @@ public class TransaccionesCC {
         return this.id;
     }
 
-    public UsuarioConductor getCuenta() {
-        return this.cuenta;
-    }
-
-    public void setCuenta(UsuarioConductor cuenta) {
-        this.cuenta = cuenta;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
-
+    /*
+     * public CuentaCorriente getCuenta() {
+     * return this.cuenta;
+     * }
+     * 
+     * public void setCuenta(CuentaCorriente cuenta) {
+     * this.cuenta = cuenta;
+     * }
+     */
 
     public TransaccionesCC() {
     }
@@ -98,18 +97,5 @@ public class TransaccionesCC {
     public void setHora(Date hora) {
         this.hora = hora;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", montoTransaccion='" + getMontoTransaccion() + "'" +
-            ", fecha='" + getFecha() + "'" +
-            ", hora='" + getHora() + "'" +
-            ", cuenta='" + getCuenta() + "'" +
-            "}";
-    }
-
-
 
 }
