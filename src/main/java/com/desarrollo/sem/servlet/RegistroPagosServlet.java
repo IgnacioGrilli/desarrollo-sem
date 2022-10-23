@@ -45,6 +45,11 @@ public class RegistroPagosServlet {
     public RegistroPagosDiarios update (@PathVariable long id, @RequestBody RegistroPagosDiarios registro){
         RegistroPagosDiarios reg = service.findById(id).orElseThrow();
         reg.setHoraFin(registro.getHoraFin());
+
+        Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
+
+        reg.setValor(min.intValue() * valService.valorActual().getValor());
+        
         return service.save(reg);
     }
 
