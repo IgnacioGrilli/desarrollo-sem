@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
 public class RegistroPatentesDiarios {
@@ -18,8 +17,7 @@ public class RegistroPatentesDiarios {
     @GeneratedValue(generator = "UUID") */
     @GeneratedValue (generator = "UUID")
     private UUID uuid = UUID.randomUUID();
-    //private UUID id;
-    //
+   
 
     @ManyToOne
     @JoinColumn (name="obleistaID")
@@ -37,17 +35,39 @@ public class RegistroPatentesDiarios {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date hora;
 
+    private float longitud;
+    private float latitud;
+
 
     public RegistroPatentesDiarios() {
     }
 
 
-    public RegistroPatentesDiarios(UUID id, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora) {
-        this.uuid = id;
+
+    public RegistroPatentesDiarios(UUID uuid, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora, float longitud, float latitud) {
+        this.uuid = uuid;
         this.usuarioObleista = usuarioObleista;
         this.patente = patente;
         this.fecha = fecha;
         this.hora = hora;
+        this.longitud = longitud;
+        this.latitud = latitud;
+    }
+
+    public float getLongitud() {
+        return this.longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+
+    public float getLatitud() {
+        return this.latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
     }
 
 
