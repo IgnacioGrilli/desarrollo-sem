@@ -2,17 +2,24 @@ package com.desarrollo.sem.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
 public class RegistroPatentesDiarios {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    /* @GeneratedValue (strategy = GenerationType.UUID) */ 
+/*     @Type () 
+    @GeneratedValue(generator = "UUID") */
+    @GeneratedValue (generator = "UUID")
+    private UUID uuid = UUID.randomUUID();
+    //private UUID id;
+    //
 
     @ManyToOne
     @JoinColumn (name="obleistaID")
@@ -35,8 +42,8 @@ public class RegistroPatentesDiarios {
     }
 
 
-    public RegistroPatentesDiarios(long id, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora) {
-        this.id = id;
+    public RegistroPatentesDiarios(UUID id, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora) {
+        this.uuid = id;
         this.usuarioObleista = usuarioObleista;
         this.patente = patente;
         this.fecha = fecha;
@@ -44,13 +51,21 @@ public class RegistroPatentesDiarios {
     }
 
 
-    public long getId() {
+    public UUID getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    /* public long getId() {
         return this.id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
+    } */
 
     public UsuarioObleista getUsuarioObleista() {
         return this.usuarioObleista;
