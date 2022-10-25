@@ -1,6 +1,7 @@
 package com.desarrollo.sem.model;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,9 +17,16 @@ public class UsuarioConductor {
   /*    @OneToMany
     private TransaccionesCC transacciones; */ 
 
+    @Column(nullable = false)
     private String mail;
+
+    @Column(nullable = false)
     private String contraseña;
+
+    @Column(nullable = false)
     private double saldo;
+    
+    @Column(nullable = true)
     private int DNI;
 
     public UsuarioConductor() {

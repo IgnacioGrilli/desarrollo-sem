@@ -22,6 +22,7 @@ public class RegistroPagosDiarios {
     private Patente patente;
 
     @Temporal (TemporalType.DATE)
+    @Column(nullable = false)
     private Calendar fecha;
 
     @ManyToOne
@@ -30,12 +31,15 @@ public class RegistroPagosDiarios {
 
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = false)
     private Date horaInicio;
 
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = true)
     private Date horaFin;
 
+    @Column(nullable = true)
     private int valor;
 
     public RegistroPagosDiarios() {

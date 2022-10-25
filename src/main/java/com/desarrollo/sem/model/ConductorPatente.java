@@ -15,11 +15,11 @@ public class ConductorPatente {
     private long id;
 
     @ManyToOne()
-    @JoinColumn(name="PATENTE_ID")
+    @JoinColumn(name="PATENTE_ID", nullable = false)
     private Patente patente;
  
     @ManyToOne()
-    @JoinColumn(name="CONDUCTOR_ID")
+    @JoinColumn(name="CONDUCTOR_ID", nullable = false)
     private UsuarioConductor conductor;
  
 

@@ -3,6 +3,7 @@ package com.desarrollo.sem.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -26,10 +27,12 @@ public class TransaccionesCC {
     private double montoTransaccion;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Calendar fecha;
 
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = false)
     private Date hora;
 
     //@JsonIgnore

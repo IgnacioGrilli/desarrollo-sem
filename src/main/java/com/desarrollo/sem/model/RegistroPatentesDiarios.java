@@ -19,15 +19,17 @@ public class RegistroPatentesDiarios {
     private UsuarioObleista usuarioObleista;
 
     @ManyToOne
-    @JoinColumn (name="patenteID")
+    @JoinColumn (name="patenteID", nullable = false)
     private Patente patente;
 
 
     @Temporal (TemporalType.DATE)
+    @Column(nullable = false)
     private Calendar fecha;
 
     @Temporal (TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = false)
     private Date hora;
 
 

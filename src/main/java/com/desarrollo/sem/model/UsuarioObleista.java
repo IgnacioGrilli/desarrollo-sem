@@ -9,6 +9,7 @@ public class UsuarioObleista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = true)
     private String nombre;
 
     public UsuarioObleista() {
