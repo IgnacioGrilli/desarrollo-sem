@@ -5,9 +5,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import java.util.Calendar;
-import java.util.Date;
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class ValorMinuto {
@@ -23,23 +21,45 @@ public class ValorMinuto {
 
 
     // Horario de la mañana 
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private Date hsInicioM;
+    private int hsInicioM;
+    private int hsFinM;
 
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private Date hsFinM;
+    public int getHsInicioM() {
+        return this.hsInicioM;
+    }
+
+    public void setHsInicioM(int hsInicioM) {
+        this.hsInicioM = hsInicioM;
+    }
+
+    public int getHsFinM() {
+        return this.hsFinM;
+    }
+
+    public void setHsFinM(int hsFinM) {
+        this.hsFinM = hsFinM;
+    }
+
+    public int getHsInicioT() {
+        return this.hsInicioT;
+    }
+
+    public void setHsInicioT(int hsInicioT) {
+        this.hsInicioT = hsInicioT;
+    }
+
+    public int getHsFinT() {
+        return this.hsFinT;
+    }
+
+    public void setHsFinT(int hsFinT) {
+        this.hsFinT = hsFinT;
+    }
 
 
     // Horario de la tarde
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private Date hsInicioT;
-
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private Date hsFinT;
+    private int hsInicioT;
+    private int hsFinT;
 
 
     public ValorMinuto() {
@@ -69,37 +89,6 @@ public class ValorMinuto {
         this.fechaDesde = fechaDesde;
     }
 
-    public Date getHsInicioM() {
-        return this.hsInicioM;
-    }
-
-    public void setHsInicioM(Date hsInicioM) {
-        this.hsInicioM = hsInicioM;
-    }
-
-    public Date getHsFinM() {
-        return this.hsFinM;
-    }
-
-    public void setHsFinM(Date hsFinM) {
-        this.hsFinM = hsFinM;
-    }
-
-    public Date getHsInicioT() {
-        return this.hsInicioT;
-    }
-
-    public void setHsInicioT(Date hsInicioT) {
-        this.hsInicioT = hsInicioT;
-    }
-
-    public Date getHsFinT() {
-        return this.hsFinT;
-    }
-
-    public void setHsFinT(Date hsFinT) {
-        this.hsFinT = hsFinT;
-    }
 
 
 }

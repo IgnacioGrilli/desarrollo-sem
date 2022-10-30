@@ -2,6 +2,7 @@ package com.desarrollo.sem.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -11,8 +12,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class RegistroPatentesDiarios {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    /* @GeneratedValue (strategy = GenerationType.UUID) */ 
+/*     @Type () 
+    @GeneratedValue(generator = "UUID") */
+    @GeneratedValue (generator = "UUID")
+    private UUID uuid = UUID.randomUUID();
+   
 
     @ManyToOne
     @JoinColumn (name="obleistaID")
@@ -30,27 +35,57 @@ public class RegistroPatentesDiarios {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date hora;
 
+    private float longitud;
+    private float latitud;
+
 
     public RegistroPatentesDiarios() {
     }
 
 
-    public RegistroPatentesDiarios(long id, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora) {
-        this.id = id;
+
+    public RegistroPatentesDiarios(UUID uuid, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora, float longitud, float latitud) {
+        this.uuid = uuid;
         this.usuarioObleista = usuarioObleista;
         this.patente = patente;
         this.fecha = fecha;
         this.hora = hora;
+        this.longitud = longitud;
+        this.latitud = latitud;
+    }
+
+    public float getLongitud() {
+        return this.longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+
+    public float getLatitud() {
+        return this.latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
     }
 
 
-    public long getId() {
+    public UUID getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    /* public long getId() {
         return this.id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
+    } */
 
     public UsuarioObleista getUsuarioObleista() {
         return this.usuarioObleista;

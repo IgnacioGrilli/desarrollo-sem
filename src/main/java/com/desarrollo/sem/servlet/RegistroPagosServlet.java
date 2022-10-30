@@ -46,6 +46,11 @@ public class RegistroPagosServlet {
         long parsedId = Long.parseLong(id);
         RegistroPagosDiarios reg = service.findById(parsedId).orElseThrow();
         reg.setHoraFin(registro.getHoraFin());
+
+        Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
+
+        reg.setValor(min.intValue() * valService.valorActual().getValor());
+        
         return service.save(reg);
     }
 

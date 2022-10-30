@@ -11,7 +11,7 @@ import com.desarrollo.sem.model.ValorMinuto;
 public interface ValorMinutoService  extends JpaRepository<ValorMinuto, Long>  {
  
   
-  @Query(value = "SELECT * from valor_minuto p ORDER BY p.fecha_desde desc limit 1", nativeQuery = true)
+  @Query(value = "SELECT * from valor_minuto p WHERE p.fecha_desde <= CURRENT_DATE ORDER BY p.fecha_desde desc limit 1", nativeQuery = true)
   ValorMinuto valorActual();
  
 
