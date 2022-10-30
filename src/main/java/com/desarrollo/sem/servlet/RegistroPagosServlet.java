@@ -42,8 +42,9 @@ public class RegistroPagosServlet {
     }
 
     @PutMapping("/update/{id}")
-    public RegistroPagosDiarios update (@PathVariable long id, @RequestBody RegistroPagosDiarios registro){
-        RegistroPagosDiarios reg = service.findById(id).orElseThrow();
+    public RegistroPagosDiarios update (@PathVariable String id, @RequestBody RegistroPagosDiarios registro){
+        long parsedId = Long.parseLong(id);
+        RegistroPagosDiarios reg = service.findById(parsedId).orElseThrow();
         reg.setHoraFin(registro.getHoraFin());
         return service.save(reg);
     }
