@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.persistence.*;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -23,7 +24,7 @@ public class RegistroPatentesDiarios {
     @JoinColumn (name="obleistaID")
     private UsuarioObleista usuarioObleista;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name="patenteID")
     private Patente patente;
 
