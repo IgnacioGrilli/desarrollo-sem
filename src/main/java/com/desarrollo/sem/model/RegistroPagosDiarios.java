@@ -25,7 +25,7 @@ public class RegistroPagosDiarios {
      * private ConductorPatente conductorPatente;
      */
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patente_id", nullable = false)
     private Patente patente;
 
