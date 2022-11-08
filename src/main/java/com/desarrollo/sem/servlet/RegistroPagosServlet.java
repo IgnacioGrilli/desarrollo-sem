@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.RegistroPagosDiarios;
+import com.desarrollo.sem.service.PatenteService;
 import com.desarrollo.sem.service.RegistroPagosService;
 import com.desarrollo.sem.service.ValorMinutoService;
 
@@ -28,6 +29,9 @@ public class RegistroPagosServlet {
     @Autowired
     private ValorMinutoService valService;
 
+    @Autowired
+    private PatenteService patService;
+
    
     /* public RegistroPagosServlet(RegistroPagosService service) {
         this.service = service;
@@ -35,6 +39,10 @@ public class RegistroPagosServlet {
     
     @PostMapping("/new")
     public RegistroPagosDiarios create(@RequestBody RegistroPagosDiarios registroPago ){
+        if (!patService.findByNombre(registroPago.getPatente().getNumero()).isEmpty()){
+            registroPago.setPatente(patService.findByNombre(registroPago.getPatente().getNumero()).get(0));
+        }
+
       return  service.save(registroPago);
       }
 
