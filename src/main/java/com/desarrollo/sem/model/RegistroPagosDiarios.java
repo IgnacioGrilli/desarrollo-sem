@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 public class RegistroPagosDiarios {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue (generator = "UUID")
+    private UUID uuid = UUID.randomUUID();
 
     @ManyToOne
     @JoinColumn(name = "obleista_id", nullable = true)
@@ -36,11 +37,11 @@ public class RegistroPagosDiarios {
     private UsuarioConductor conductor;
 
     @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date horaInicio;
 
     @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date horaFin;
 
     private int valor;
@@ -48,13 +49,15 @@ public class RegistroPagosDiarios {
     public RegistroPagosDiarios() {
     }
 
-    public long getId() {
-        return this.id;
+
+    public UUID getUuid() {
+        return this.uuid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
+   
 
 
     public Patente getPatente() {

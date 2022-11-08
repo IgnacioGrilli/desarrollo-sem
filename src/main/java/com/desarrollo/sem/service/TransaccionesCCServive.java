@@ -13,8 +13,9 @@ import com.desarrollo.sem.model.TransaccionesCC;
 public interface TransaccionesCCServive extends JpaRepository<TransaccionesCC, Long> {
 
   //busca las transacciones de un usuario 
-  @Query(value = "SELECT p FROM TransaccionesCC p WHERE p.cuenta.mail = ?1")
-  List<TransaccionesCC> getTransaccionesUsuario(String mail);
+  @Query(value = "SELECT NEW com.desarrollo.sem.service.TransaccionDTO (p.id, p.montoTransaccion, p.fecha, p.hora)"+
+  " FROM TransaccionesCC p WHERE p.cuenta.mail = ?1")
+  List<TransaccionDTO> getTransaccionesUsuario(String mail);
 
 
 }

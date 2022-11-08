@@ -1,6 +1,8 @@
 package com.desarrollo.sem.servlet;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +44,46 @@ public class RegistroPagosServlet {
     }
 
     @PutMapping("/update/{id}")
-    public RegistroPagosDiarios update (@PathVariable String id, @RequestBody RegistroPagosDiarios registro){
-        long parsedId = Long.parseLong(id);
-        RegistroPagosDiarios reg = service.findById(parsedId).orElseThrow();
+    public RegistroPagosDiarios update (@PathVariable String id, @RequestBody RegistroPagosDiarios registro) throws Exception{
+   
+
+        RegistroPagosDiarios reg = service.findOneByUuid(UUID.fromString(id));/* .orElseThrow(); */
+        
+       /*  if (registro.getHoraFin().getTime() < reg.getHoraInicio().getTime())
+            return throw new Exception("La hora de fin no puede ser menor a la hora de inicio");
+         */
         reg.setHoraFin(registro.getHoraFin());
+ 
+        //---- valida que la hora de finalizacion este en el horario vigente
+        System.out.println(reg.getHoraInicio().getTime()/3600000);
+        System.out.println(registro.getHoraFin().getTime()-10800000); 
+        Calendar cal = reg.getFecha();
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        
+        //si el estacionamiento se finaliza luego del horario de la mañana
+         if (((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinM())
+         && ((reg.getHoraInicio().getTime()-10800000)/3600000<=valService.valorActual().getHsInicioT())) {
+            cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinM());
+            reg.setHoraFin(cal.getTime());
+        }
+            
+         
+        //si el estacionamiento se finaliza luego del horario de la tarde
+        if ((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinT()
+        && ((reg.getHoraInicio().getTime()-10800000)/3600000>=valService.valorActual().getHsInicioT())) {
+            cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinT());
+            reg.setHoraFin(cal.getTime());
+        } 
+             
+        
+        /* System.out.println(registro.getHoraFin().getTime()/3600000);
+        System.out.println(valService.valorActual().getHsFinM());
+        registro.setHoraFin(cal.getTime()); */
+        /* getHoraFin().setTime(cal.getTimeInMillis()); */
+        //System.out.println(registro.getHoraFin().toString());
+        
+
 
         Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
 

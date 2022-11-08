@@ -37,6 +37,7 @@ public class RegistroPatentesDiarios {
 
     private float longitud;
     private float latitud;
+    private String foto;
 
 
     public RegistroPatentesDiarios() {
@@ -44,7 +45,7 @@ public class RegistroPatentesDiarios {
 
 
 
-    public RegistroPatentesDiarios(UUID uuid, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora, float longitud, float latitud) {
+    public RegistroPatentesDiarios(UUID uuid, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora, float longitud, float latitud, String foto) {
         this.uuid = uuid;
         this.usuarioObleista = usuarioObleista;
         this.patente = patente;
@@ -52,6 +53,15 @@ public class RegistroPatentesDiarios {
         this.hora = hora;
         this.longitud = longitud;
         this.latitud = latitud;
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public float getLongitud() {
