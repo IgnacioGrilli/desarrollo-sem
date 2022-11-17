@@ -63,11 +63,27 @@ public class RegistroPagosServlet {
         reg.setHoraFin(registro.getHoraFin());
  
         //---- valida que la hora de finalizacion este en el horario vigente
-        System.out.println(reg.getHoraInicio().getTime()/3600000);
-        System.out.println(registro.getHoraFin().getTime()-10800000); 
+        /* System.out.println(reg.getHoraInicio().getTime()/3600000);
+        System.out.println(registro.getHoraFin().getTime()-10800000); */ 
+        //System.out.println(reg.getFecha().toString());
         Calendar cal = reg.getFecha();
+        cal.set(Calendar.YEAR, 2022);
+        cal.set(Calendar.MONTH, 10);
+        cal.set(Calendar.DATE, 10);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
+        cal.setTime(registro.getHoraFin());
+/* 
+        Calendar cal2 = reg.getFecha();
+        cal2.set(Calendar.YEAR, 2022);
+        cal2.set(Calendar.MONTH, 10);
+        cal2.set(Calendar.DATE, 10);
+        cal2.set(Calendar.MINUTE, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+
+        System.out.println(cal.getTime().toString());
+        System.out.println(cal2.getTime().toString()); */
+
         
         //si el estacionamiento se finaliza luego del horario de la mañana
          if (((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinM())
@@ -91,11 +107,12 @@ public class RegistroPagosServlet {
         /* getHoraFin().setTime(cal.getTimeInMillis()); */
         //System.out.println(registro.getHoraFin().toString());
         
+       //System.out.println(reg.getHoraFin().get);
 
-
-        Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
-
-        reg.setValor(min.intValue() * valService.valorActual().getValor());
+        int min = (reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()) - (reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes());
+        //Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
+        System.out.println(min);
+        reg.setValor(min * valService.valorActual().getValor());
         
         return service.save(reg);
     }
