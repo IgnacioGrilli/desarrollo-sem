@@ -82,6 +82,13 @@ public class UsuarioConductorServlet {
 
     }
 
+
+    @GetMapping("/saldo/{mail}")
+    public String getSaldo(@PathVariable String mail) {
+        return String.valueOf(service.findByMail(mail).getSaldo());
+    }
+
+
     /*
      * @PutMapping("/newMovimiento/{val}")
      * public UsuarioConductor newMovimiento(@RequestBody UsuarioConductor

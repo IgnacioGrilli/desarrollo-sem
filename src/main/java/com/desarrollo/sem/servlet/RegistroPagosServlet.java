@@ -108,11 +108,12 @@ public class RegistroPagosServlet {
         //System.out.println(registro.getHoraFin().toString());
         
        //System.out.println(reg.getHoraFin().get);
-
-        int min = (reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()) - (reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes());
+       
+        int min = ((reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes() - reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()));
         //Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
         System.out.println(min);
         reg.setValor(min * valService.valorActual().getValor());
+        
         
         return service.save(reg);
     }
