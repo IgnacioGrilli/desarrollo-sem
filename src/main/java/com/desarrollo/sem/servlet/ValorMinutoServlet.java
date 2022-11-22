@@ -19,7 +19,7 @@ public class ValorMinutoServlet {
     private ValorMinutoService service;
 
     @GetMapping("/ValorActual")
-    public int valorActual() {
+    public double valorActual() {
         /* List<ValorMinuto> v = service.valorActual(PageRequest.of(0,1)); */
         /* return service.findTopByOrderByvalorDesc().getValor(); */
          return service.valorActual().getValor();

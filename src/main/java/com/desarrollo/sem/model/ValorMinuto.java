@@ -3,6 +3,9 @@ package com.desarrollo.sem.model;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.GeneratedValue;
 import java.util.Calendar;
 import javax.persistence.*;
@@ -14,11 +17,20 @@ public class ValorMinuto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int valor;
+    private double valor;
 
     @Temporal (TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/YY")
     private Calendar fechaDesde;
 
+
+    public double getValor() {
+        return this.valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 
     // Horario de la mañana 
     private int hsInicioM;
@@ -73,13 +85,6 @@ public class ValorMinuto {
         this.id = id;
     }
 
-    public int getValor() {
-        return this.valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
 
     public Calendar getFechaDesde() {
         return this.fechaDesde;
