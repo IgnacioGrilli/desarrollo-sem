@@ -42,7 +42,15 @@ public class RegistroPagosServlet {
         if (!patService.findByNombre(registroPago.getPatente().getNumero()).isEmpty()){
             registroPago.setPatente(patService.findByNombre(registroPago.getPatente().getNumero()).get(0));
         }
+        Calendar cal = registroPago.getFecha();
+        if (registroPago.getHoraInicio().getHours()<valService.valorActual().getHsFinM())
+            cal.set(Calendar.HOUR, valService.valorActual().getHsFinM()+3);
+        else 
+            cal.set(Calendar.HOUR, valService.valorActual().getHsFinT()+3);
 
+        cal.set(Calendar.MINUTE, 0);
+        registroPago.setHoraFin(cal.getTime());
+        registroPago.setValor(0);
       return  service.save(registroPago);
       }
 
