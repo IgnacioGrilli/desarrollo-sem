@@ -109,10 +109,10 @@ public class RegistroPagosServlet {
         
        //System.out.println(reg.getHoraFin().get);
        
-        int min = ((reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes() - reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()));
+        int min = ((reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes()) - (reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()));
         //Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
         System.out.println(min);
-        reg.setValor(min * valService.valorActual().getValor());
+        reg.setValor((int) Math.round(min * valService.valorActual().getValor()));
         
         
         return service.save(reg);
@@ -131,7 +131,7 @@ public class RegistroPagosServlet {
     public long valor(@PathVariable long id) {
         RegistroPagosDiarios reg = service.findById(id).orElseThrow();
     
-        reg.setValor(minutos(id) * valService.valorActual().getValor()); 
+        reg.setValor((int) Math.round(minutos(id) * valService.valorActual().getValor())); 
         service.save(reg);
         
         return reg.getValor();
