@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.RegistroPagosDiarios;
+import com.desarrollo.sem.model.TransaccionesCC;
+import com.desarrollo.sem.model.UsuarioConductor;
 import com.desarrollo.sem.service.PatenteService;
 import com.desarrollo.sem.service.RegistroPagosService;
+import com.desarrollo.sem.service.TransaccionesCCServive;
 import com.desarrollo.sem.service.ValorMinutoService;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,11 +35,23 @@ public class RegistroPagosServlet {
     @Autowired
     private PatenteService patService;
 
+    @Autowired
+    private TransaccionesCCServive serviceTransaccion;
    
     /* public RegistroPagosServlet(RegistroPagosService service) {
         this.service = service;
     } */
     
+
+    /* hace un insert en transaccion lo que descuenta el saldo del 
+     * conductor con el trigger de la bd
+     */
+    public void descSaldo(int val, UsuarioConductor cond) {
+        serviceTransaccion.save(
+                    new TransaccionesCC(val, Calendar.getInstance(), Calendar.getInstance().getTime(), cond));
+    }
+
+
     @PostMapping("/new")
     public RegistroPagosDiarios create(@RequestBody RegistroPagosDiarios registroPago ){
         if (!patService.findByNombre(registroPago.getPatente().getNumero()).isEmpty()){
@@ -120,12 +135,15 @@ public class RegistroPagosServlet {
         int min = ((reg.getHoraFin().getHours()*60+reg.getHoraFin().getMinutes()) - (reg.getHoraInicio().getHours()*60+reg.getHoraInicio().getMinutes()));
         //Long min = (reg.getHoraInicio().getTime() - reg.getHoraFin().getTime()) / 60000;
         System.out.println(min);
-        reg.setValor((int) Math.round(min * valService.valorActual().getValor()));
-        
+        int val = (int) Math.round(min * valService.valorActual().getValor());
+        reg.setValor(val);
+        descSaldo(-val, reg.getConductor());
         
         return service.save(reg);
     }
 
+
+    //deprecated por ahora
     @GetMapping("/minTotales/{id}") 
     public int minutos(@PathVariable long id) {
         RegistroPagosDiarios reg = service.findById(id).orElseThrow();
@@ -135,6 +153,7 @@ public class RegistroPagosServlet {
         return min.intValue();
     }   
 
+    //deprecated por ahora
     @PutMapping("/valor/{id}")
     public long valor(@PathVariable long id) {
         RegistroPagosDiarios reg = service.findById(id).orElseThrow();
@@ -143,7 +162,7 @@ public class RegistroPagosServlet {
         service.save(reg);
         
         return reg.getValor();
-    }     
+    }  
 }
 
     
