@@ -23,4 +23,11 @@ public class InfraccionServlet {
     public List<InfraccionDTO> findInfraccionesByPatente(@PathVariable String patente) {
         return service.getInfraccionesByPatente(patente);
     }
+
+    // Nuevo método para obtener todas las infracciones sin distinción de patentes
+    @GetMapping("/all")
+    public List<InfraccionDTO> findAllInfracciones() {
+        return service.getAllInfracciones();
+    }
+
 }
