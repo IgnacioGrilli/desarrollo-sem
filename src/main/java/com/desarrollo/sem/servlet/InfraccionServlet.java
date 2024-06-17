@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desarrollo.sem.service.InfraccionDTO;
 import com.desarrollo.sem.service.InfraccionService;
-import com.desarrollo.sem.service.ObleistaSummaryDTO;
 
 @RestController
 @RequestMapping("infraccion")
@@ -24,16 +23,4 @@ public class InfraccionServlet {
     public List<InfraccionDTO> findInfraccionesByPatente(@PathVariable String patente) {
         return service.getInfraccionesByPatente(patente);
     }
-
-    // Nuevo método para obtener todas las infracciones sin distinción de patentes
-    @GetMapping("/all")
-    public List<InfraccionDTO> findAllInfracciones() {
-        return service.getAllInfracciones();
-    }
-
-    @GetMapping("/obleista-summaries")
-    public List<ObleistaSummaryDTO> getObleistaSummaries() {
-        return service.getObleistaSummaries();
-    }
-
 }

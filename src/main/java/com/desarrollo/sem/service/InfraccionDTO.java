@@ -16,8 +16,8 @@ public class InfraccionDTO {
     private String patente;
     private Date hora;
 
-    // Constructor
-    public InfraccionDTO(String id, Calendar fecha, String patente, Date hora) {
+     // Constructor
+     public InfraccionDTO(String id, Calendar fecha, String patente, Date hora) {
         this.id = id;
         this.fecha = fecha;
         this.patente = patente;
@@ -27,7 +27,7 @@ public class InfraccionDTO {
     public InfraccionDTO() {
     }
 
-
+    
 
     public String getId() {
         return this.id;
@@ -61,16 +61,16 @@ public class InfraccionDTO {
         this.hora = hora;
     }
 
-    // Método toString
-    @Override
-    public String toString() {
-        return "InfraccionDTO{" +
-                "id=" + id +
-                ", fecha=" + (fecha != null ? fecha.getTime() : null) +
-                ", patente='" + patente + '\'' +
-                ", hora=" + hora +
-                '}';
-    }
+     // Método toString
+     @Override
+     public String toString() {
+         return "InfraccionDTO{" +
+                 "id=" + id +
+                 ", fecha=" + (fecha != null ? fecha.getTime() : null) +
+                 ", patente='" + patente + '\'' +
+                 ", hora=" + hora +
+                 '}';
+     }
 
 
 

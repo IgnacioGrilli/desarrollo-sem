@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desarrollo.sem.model.ConductorPatente;
 import com.desarrollo.sem.model.Patente;
 import com.desarrollo.sem.service.ConductorPatenteService;
-import com.desarrollo.sem.service.PatenteService;
 import com.desarrollo.sem.service.UsuarioConductorService;
 
 @RestController
@@ -24,8 +23,6 @@ public class ConductorPatenteServlet {
     @Autowired
     private ConductorPatenteService service;
 
-    @Autowired
-    private PatenteService patService;
 
     @Autowired
     private UsuarioConductorService condService;
