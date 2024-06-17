@@ -11,9 +11,7 @@ public class UsuarioObleista {
 
     private String nombre;
 
-    public UsuarioObleista() {
-        
-    }
+    public UsuarioObleista() { }
 
     public int getId() {
         return this.id;

@@ -18,15 +18,12 @@ public class Patente {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    
 
     @Override
     public String toString() {
         return "{" +
             " numero='" + getNumero() + "'" +
-            "}";
+        "}";
     }
-
-    
 
 }

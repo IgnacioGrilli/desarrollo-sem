@@ -18,7 +18,6 @@ public class RegistroPatentesDiarios {
     @GeneratedValue(generator = "UUID") */
     @GeneratedValue (generator = "UUID")
     private UUID uuid = UUID.randomUUID();
-   
 
     @ManyToOne
     @JoinColumn (name="obleistaID")
@@ -27,7 +26,6 @@ public class RegistroPatentesDiarios {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name="patenteID")
     private Patente patente;
-
 
     @Temporal (TemporalType.DATE)
     private Calendar fecha;
@@ -40,11 +38,8 @@ public class RegistroPatentesDiarios {
     private float latitud;
     private String foto;
 
-
     public RegistroPatentesDiarios() {
     }
-
-
 
     public RegistroPatentesDiarios(UUID uuid, UsuarioObleista usuarioObleista, Patente patente, Calendar fecha, Date hora, float longitud, float latitud, String foto) {
         this.uuid = uuid;
@@ -81,7 +76,6 @@ public class RegistroPatentesDiarios {
         this.latitud = latitud;
     }
 
-
     public UUID getUuid() {
         return this.uuid;
     }
@@ -89,14 +83,6 @@ public class RegistroPatentesDiarios {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-
-    /* public long getId() {
-        return this.id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    } */
 
     public UsuarioObleista getUsuarioObleista() {
         return this.usuarioObleista;
@@ -114,7 +100,6 @@ public class RegistroPatentesDiarios {
         this.patente = patente;
     }
 
-
     public Calendar getFecha() {
         return this.fecha;
     }
@@ -131,6 +116,4 @@ public class RegistroPatentesDiarios {
         this.hora = hora;
     }
 
-
-    
 }

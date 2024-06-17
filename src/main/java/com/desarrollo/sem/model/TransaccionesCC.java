@@ -38,14 +38,12 @@ public class TransaccionesCC {
     @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
     private UsuarioConductor cuenta;
 
-
     public TransaccionesCC( double montoTransaccion, Calendar fecha, Date hora, UsuarioConductor cuenta) {
         this.montoTransaccion = montoTransaccion;
         this.fecha = fecha;
         this.hora = hora;
         this.cuenta = cuenta;
     }
-
 
     public TransaccionesCC(long id, double montoTransaccion, Calendar fecha, Date hora) {
         this.id = id;
@@ -69,8 +67,6 @@ public class TransaccionesCC {
     public void setId(long id) {
         this.id = id;
     }
-
-
 
     public TransaccionesCC() {
     }
@@ -107,9 +103,7 @@ public class TransaccionesCC {
             ", fecha='" + getFecha() + "'" +
             ", hora='" + getHora() + "'" +
             ", cuenta='" + getCuenta() + "'" +
-            "}";
+        "}";
     }
-
-
 
 }

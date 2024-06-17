@@ -23,6 +23,15 @@ public class ValorMinuto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/YY")
     private Calendar fechaDesde;
 
+    // Horario de la mañana
+    private int hsInicioM;
+    private int hsFinM;
+
+    // Horario de la tarde
+    private int hsInicioT;
+    private int hsFinT;
+
+    public ValorMinuto() {  }
 
     public double getValor() {
         return this.valor;
@@ -31,10 +40,6 @@ public class ValorMinuto {
     public void setValor(double valor) {
         this.valor = valor;
     }
-
-    // Horario de la mañana 
-    private int hsInicioM;
-    private int hsFinM;
 
     public int getHsInicioM() {
         return this.hsInicioM;
@@ -68,15 +73,6 @@ public class ValorMinuto {
         this.hsFinT = hsFinT;
     }
 
-
-    // Horario de la tarde
-    private int hsInicioT;
-    private int hsFinT;
-
-
-    public ValorMinuto() {
-    }
-
     public long getId() {
         return this.id;
     }
@@ -85,7 +81,6 @@ public class ValorMinuto {
         this.id = id;
     }
 
-
     public Calendar getFechaDesde() {
         return this.fechaDesde;
     }
@@ -93,7 +88,5 @@ public class ValorMinuto {
     public void setFechaDesde(Calendar fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
-
-
 
 }

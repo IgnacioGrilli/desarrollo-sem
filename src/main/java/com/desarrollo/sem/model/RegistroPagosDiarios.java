@@ -46,9 +46,7 @@ public class RegistroPagosDiarios {
 
     private int valor;
 
-    public RegistroPagosDiarios() {
-    }
-
+    public RegistroPagosDiarios() {     }
 
     public UUID getUuid() {
         return this.uuid;
@@ -57,8 +55,6 @@ public class RegistroPagosDiarios {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-   
-
 
     public Patente getPatente() {
         return this.patente;
@@ -92,16 +88,6 @@ public class RegistroPagosDiarios {
         this.usuarioObleista = usuarioObleista;
     }
 
-    /*
-     * public ConductorPatente getConductorPatente() {
-     * return this.conductorPatente;
-     * }
-     * 
-     * public void setConductorPatente(ConductorPatente conductorPatente) {
-     * this.conductorPatente = conductorPatente;
-     * }
-     */
-
     public Date getHoraInicio() {
         return this.horaInicio;
     }
@@ -125,7 +111,5 @@ public class RegistroPagosDiarios {
     public void setValor(int valor) {
         this.valor = valor;
     }
-
-    
 
 }

@@ -13,16 +13,17 @@ public class UsuarioConductor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-  /*    @OneToMany
-    private TransaccionesCC transacciones; */ 
+    /*
+    @OneToMany
+    private TransaccionesCC transacciones;
+    */
 
     private String mail;
     private String contraseña;
     private double saldo;
     private int DNI;
 
-    public UsuarioConductor() {
-    }
+    public UsuarioConductor() { }
 
     public String getMail() {
         return this.mail;
@@ -72,7 +73,7 @@ public class UsuarioConductor {
                 ", contraseña='" + getContraseña() + "'" +
                 ", saldo='" + getSaldo() + "'" +
                 ", DNI='" + getDNI() + "'" +
-                "}";
+        "}";
     }
 
 }

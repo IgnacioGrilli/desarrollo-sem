@@ -22,7 +22,6 @@ public class ConductorPatente {
     @ManyToOne()
     @JoinColumn(name="CONDUCTOR_ID")
     private UsuarioConductor conductor;
- 
 
     public ConductorPatente() {
     }
@@ -40,8 +39,6 @@ public class ConductorPatente {
         this.id = id;
     }
 
-  
-
     public Patente getPatente() {
         return this.patente;
     }
@@ -58,17 +55,13 @@ public class ConductorPatente {
         this.conductor = conductor;
     }
 
-
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", patente='" + getPatente() + "'" +
             ", conductor='" + getConductor() + "'" +
-            "}";
+        "}";
     }
 
-
-
-
-    }
+}
