@@ -1,9 +1,11 @@
 package com.desarrollo.sem.servlet;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,4 +38,14 @@ public class InfraccionServlet {
         return service.getObleistaSummaries();
     }
 
+    @GetMapping("/byFecha/{fecha}")
+    public ResponseEntity<List<InfraccionDTO>> getInfraccionesByFecha(@PathVariable String fecha) {
+        try {
+            Date sqlDate = Date.valueOf(fecha);  // Convertir la cadena a java.sql.Date
+            return ResponseEntity.ok(service.getInfraccionesByFecha(sqlDate));
+        } catch (IllegalArgumentException e) {
+            // Manejar el caso donde la fecha no esté en el formato correcto
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 }
