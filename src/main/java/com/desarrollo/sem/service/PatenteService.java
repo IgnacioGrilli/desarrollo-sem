@@ -21,4 +21,7 @@ public interface PatenteService extends JpaRepository<Patente, Long>  {
   )
   List<Patente> findByNombreJpql(String num2);
 
+
+  @Query(value = "SELECT p FROM Patente p WHERE p.numero = ?1")
+    Patente findByNumero(String numero);
 }
