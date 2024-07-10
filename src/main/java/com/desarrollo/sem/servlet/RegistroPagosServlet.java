@@ -95,6 +95,7 @@ public class RegistroPagosServlet {
         cal.set(Calendar.YEAR, 2022);
         cal.set(Calendar.MONTH, 10);
         cal.set(Calendar.DATE, 10);
+        cal.set(Calendar.HOUR, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
         System.out.println("aca+" + reg.getFecha().getTime());
