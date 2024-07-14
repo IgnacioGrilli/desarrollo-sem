@@ -95,4 +95,10 @@ public class ConductorPatenteServlet {
     
     } 
 
+    // Nuevo método para encontrar ConductorPatente por ID del conductor
+    @GetMapping("/byConductor/{conductorId}")
+    public List<ConductorPatente> findByConductorId(@PathVariable Long conductorId) {
+        return service.findByConductorId(conductorId);
+    }
+
 }

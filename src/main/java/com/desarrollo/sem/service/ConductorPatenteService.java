@@ -23,4 +23,8 @@ public interface ConductorPatenteService extends JpaRepository<ConductorPatente,
 
     @Transactional
     void deleteById(Long id);
+
+    // Nuevo método para encontrar ConductorPatente por ID del conductor
+    @Query("SELECT cp FROM ConductorPatente cp WHERE cp.conductor.id = ?1")
+    List<ConductorPatente> findByConductorId(Long conductorId);
 }
