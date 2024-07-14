@@ -17,8 +17,11 @@ public interface PatenteService extends JpaRepository<Patente, Long>  {
 
 
   @Query(value = "SELECT * FROM patente WHERE patente.numero like %?1%",
-  nativeQuery = true
+          nativeQuery = true
   )
   List<Patente> findByNombreJpql(String num2);
 
+
+  @Query(value = "SELECT p FROM Patente p WHERE p.numero = ?1")
+  Patente findByNumero(String numero);
 }

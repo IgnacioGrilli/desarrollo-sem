@@ -19,7 +19,7 @@ import com.desarrollo.sem.service.PatenteService;
 @RequestMapping("patentes")
 public class PatenteServlet {
 
-   
+
     @Autowired
     private PatenteService service;
 

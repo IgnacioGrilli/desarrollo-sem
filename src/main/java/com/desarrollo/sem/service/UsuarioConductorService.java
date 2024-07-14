@@ -21,14 +21,18 @@ public interface UsuarioConductorService extends JpaRepository<UsuarioConductor,
 
     
      /* @Query(value =
-      "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.fk_cc = :idCuenta "
-     , nativeQuery = true)
-      List<Double> findBySaldo(@Param("idCuenta")long idCuenta); */
+        "SELECT sum(transaccionescc.monto_transaccion) +
+            from transaccionescc where +
+            transaccionescc.fk_cc = :idCuenta ",
+            nativeQuery = true)
+        List<Double> findBySaldo(@Param("idCuenta")long idCuenta); */
 
 
       @Query(value =
-      "SELECT sum(transaccionescc.monto_transaccion) from transaccionescc where transaccionescc.usuario_id = :idCuenta AND transaccionescc.fecha <= :fecha"
-     , nativeQuery = true)
+      "SELECT sum(transaccionescc.monto_transaccion) " +
+              "from transaccionescc where " +
+              "transaccionescc.usuario_id = :idCuenta AND transaccionescc.fecha <= :fecha",
+              nativeQuery = true)
       Double findBySaldo(@Param("idCuenta")long idCuenta, @Param("fecha") Calendar fecha);
     
 }
