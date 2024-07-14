@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.desarrollo.sem.model.ConductorPatente;
 import com.desarrollo.sem.model.Patente;
@@ -19,4 +20,7 @@ public interface ConductorPatenteService extends JpaRepository<ConductorPatente,
 
     @Query("SELECT cp FROM ConductorPatente cp WHERE cp.conductor = ?1 AND cp.patente = ?2")
     ConductorPatente findByConductorAndPatente(UsuarioConductor conductor, Patente patente);
+
+    @Transactional
+    void deleteById(Long id);
 }
