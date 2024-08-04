@@ -85,7 +85,7 @@ public class RegistroPagosServlet {
             return throw new Exception("La hora de fin no puede ser menor a la hora de inicio");
          */
         reg.setHoraFin(registro.getHoraFin());
-        System.out.println("2+" + reg.getFecha().getTime());
+        System.out.println("2+" + reg.getHoraFin());
         //---- valida que la hora de finalizacion este en el horario vigente
         /* System.out.println(reg.getHoraInicio().getTime()/3600000);
         System.out.println(registro.getHoraFin().getTime()-10800000); */ 
@@ -100,6 +100,7 @@ public class RegistroPagosServlet {
         cal.set(Calendar.MILLISECOND, 0);
         System.out.println("aca+" + reg.getFecha().getTime());
         cal.setTime(registro.getHoraFin());
+        System.out.println("HORA FIINNNN" + cal.getTime());
         System.out.println("3+" + reg.getFecha().getTime());
 /*      
         Calendar cal2 = reg.getFecha();
@@ -116,6 +117,7 @@ public class RegistroPagosServlet {
         //si el estacionamiento se finaliza luego del horario de la mañana
          if (((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinM())
          && ((reg.getHoraInicio().getTime()-10800000)/3600000<=valService.valorActual().getHsInicioT())) {
+            System.out.println("ENTRO 1");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinM());
             reg.setHoraFin(cal.getTime());
         }
@@ -124,7 +126,9 @@ public class RegistroPagosServlet {
         //si el estacionamiento se finaliza luego del horario de la tarde
         if ((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinT()
         && ((reg.getHoraInicio().getTime()-10800000)/3600000>=valService.valorActual().getHsInicioT())) {
+            System.out.println("ENTRO 2");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinT());
+            
             reg.setHoraFin(cal.getTime());
         } 
              
@@ -144,7 +148,7 @@ public class RegistroPagosServlet {
         reg.setValor(val);
         descSaldo(-val, reg.getConductor());
         reg.setFecha(registro.getFecha());
-        System.out.println("final" + reg.getFecha().getTime());
+        System.out.println("final" + reg.getHoraFin());
         return service.save(reg);
     }
 

@@ -15,7 +15,7 @@ public class ConductorPatente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="PATENTE_ID")
     private Patente patente;
  
