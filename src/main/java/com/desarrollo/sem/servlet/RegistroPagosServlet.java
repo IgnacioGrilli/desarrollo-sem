@@ -119,6 +119,7 @@ public class RegistroPagosServlet {
          && ((reg.getHoraInicio().getTime()-10800000)/3600000<=valService.valorActual().getHsInicioT())) {
             System.out.println("ENTRO 1");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinM());
+            cal.set(Calendar.MINUTE, 00);
             reg.setHoraFin(cal.getTime());
         }
             
@@ -128,7 +129,7 @@ public class RegistroPagosServlet {
         && ((reg.getHoraInicio().getTime()-10800000)/3600000>=valService.valorActual().getHsInicioT())) {
             System.out.println("ENTRO 2");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinT());
-            
+            cal.set(Calendar.MINUTE, 00);
             reg.setHoraFin(cal.getTime());
         } 
              
