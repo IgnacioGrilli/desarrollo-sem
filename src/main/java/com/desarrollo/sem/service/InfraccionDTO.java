@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class InfraccionDTO {
 
@@ -14,6 +16,8 @@ public class InfraccionDTO {
     private String id;
     private Calendar fecha;
     private String patente;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/Argentina/Buenos_Aires")
     private Date hora;
 
     // Constructor
