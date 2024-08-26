@@ -112,26 +112,43 @@ public class RegistroPagosServlet {
 
         System.out.println(cal.getTime().toString());
         System.out.println(cal2.getTime().toString()); */
-
-        
+        System.out.println("horas deprecated: " + registro.getHoraFin().getHours());
+        System.out.println("Hora Fin: " + registro.getHoraFin() +  " Hora inicio: " + reg.getHoraInicio() + " HsFin mañana: " + valService.valorActual().getHsFinM()
+        + " HsInicio T: "+ valService.valorActual().getHsInicioT() + " hsFinT: " + valService.valorActual().getHsFinT());
+        System.out.println("reg.getHoraInicio: " + reg.getHoraInicio().getHours());
         //si el estacionamiento se finaliza luego del horario de la mañana
-         if (((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinM())
-         && ((reg.getHoraInicio().getTime()-10800000)/3600000<=valService.valorActual().getHsInicioT())) {
+        if (((registro.getHoraFin().getHours()>=valService.valorActual().getHsFinM())
+         && ((reg.getHoraInicio().getHours()<valService.valorActual().getHsInicioT())))) {
             System.out.println("ENTRO 1");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinM());
             cal.set(Calendar.MINUTE, 00);
             reg.setHoraFin(cal.getTime());
         }
+     /*     if (((registro.getHoraFin().getTime())/3600000>=valService.valorActual().getHsFinM())
+         && ((reg.getHoraInicio().getTime())/3600000<=valService.valorActual().getHsInicioT())) {
+            System.out.println("ENTRO 1");
+            cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinM());
+            cal.set(Calendar.MINUTE, 00);
+            reg.setHoraFin(cal.getTime());
+        } */
             
+
         System.out.println("4+" + reg.getFecha().getTime());
         //si el estacionamiento se finaliza luego del horario de la tarde
-        if ((registro.getHoraFin().getTime()-10800000)/3600000>=valService.valorActual().getHsFinT()
-        && ((reg.getHoraInicio().getTime()-10800000)/3600000>=valService.valorActual().getHsInicioT())) {
+        if ((registro.getHoraFin().getHours()>=valService.valorActual().getHsFinT()
+        && ((reg.getHoraInicio().getHours())>=valService.valorActual().getHsInicioT()))) {
             System.out.println("ENTRO 2");
             cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinT());
             cal.set(Calendar.MINUTE, 00);
             reg.setHoraFin(cal.getTime());
         } 
+    /*     if ((registro.getHoraFin().getTime())/3600000>=valService.valorActual().getHsFinT()
+        && ((reg.getHoraInicio().getTime())/3600000>=valService.valorActual().getHsInicioT())) {
+            System.out.println("ENTRO 2");
+            cal.set(Calendar.HOUR_OF_DAY, valService.valorActual().getHsFinT());
+            cal.set(Calendar.MINUTE, 00);
+            reg.setHoraFin(cal.getTime());
+        }  */
              
         
         /* System.out.println(registro.getHoraFin().getTime()/3600000);
