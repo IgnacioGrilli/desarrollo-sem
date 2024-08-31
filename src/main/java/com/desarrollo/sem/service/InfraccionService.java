@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 interface InfraccionRepository extends JpaRepository<InfraccionDTO, Long> {
 
     // Nueva query para obtener todas las infracciones sin distinción de patentes
-    @Query(value = "SELECT rpd.uuid AS id, rpd.fecha AS fecha, rpd.patenteid AS patente, rpd.hora AS hora FROM registro_patentes_diarios rpd EXCEPT SELECT DISTINCT ON (rpat.uuid) rpat.uuid, rpat.fecha, rpat.patenteid, rpat.hora FROM registro_pagos_diarios rpag JOIN registro_patentes_diarios rpat ON rpag.patente_id = rpat.patenteid WHERE rpag.fecha = rpat.fecha AND rpat.hora >= rpag.hora_inicio AND rpat.hora <= rpag.hora_fin", nativeQuery = true)
+    @Query(value = "SELECT rpd.uuid AS id, rpd.fecha AS fecha, rpd.patenteid AS patente, rpd.hora AS hora FROM registro_patentes_diarios rpd EXCEPT SELECT DISTINCT ON (rpat.uuid) rpat.uuid, rpat.fecha, rpat.patenteid, rpat.hora FROM registro_pagos_diarios rpag JOIN registro_patentes_diarios rpat ON rpag.patente_id = rpat.patenteid WHERE rpag.fecha = rpat.fecha AND rpat.hora >= rpag.hora_inicio AND rpat.hora <= rpag.hora_fin ORDER BY fecha DESC", nativeQuery = true)
     List<InfraccionDTO> findAllInfracciones();
 
-    @Query(value = "SELECT rpd.uuid AS id, rpd.fecha AS fecha, rpd.patenteid AS patente, rpd.hora AS hora FROM registro_patentes_diarios rpd WHERE rpd.patenteid = ?1 EXCEPT SELECT DISTINCT ON (rpat.uuid) rpat.uuid, rpat.fecha, rpat.patenteid, rpat.hora FROM registro_pagos_diarios rpag JOIN registro_patentes_diarios rpat ON rpag.patente_id = rpat.patenteid WHERE rpat.patenteid = ?1 AND rpag.fecha = rpat.fecha AND rpat.hora >= rpag.hora_inicio AND rpat.hora <= rpag.hora_fin", nativeQuery = true)
+    @Query(value = "SELECT rpd.uuid AS id, rpd.fecha AS fecha, rpd.patenteid AS patente, rpd.hora AS hora FROM registro_patentes_diarios rpd WHERE rpd.patenteid = ?1 EXCEPT SELECT DISTINCT ON (rpat.uuid) rpat.uuid, rpat.fecha, rpat.patenteid, rpat.hora FROM registro_pagos_diarios rpag JOIN registro_patentes_diarios rpat ON rpag.patente_id = rpat.patenteid WHERE rpat.patenteid = ?1 AND rpag.fecha = rpat.fecha AND rpat.hora >= rpag.hora_inicio AND rpat.hora <= rpag.hora_fin ORDER BY fecha DESC", nativeQuery = true)
     List<InfraccionDTO> findInfraccionesByPatente(String patente);
 
     @Query(value = "SELECT uo.id AS obleistaId, uo.nombre AS obleistaNombre, SUM(rpd.valor) AS totalValor, COUNT(*) AS totalRegistros FROM public.registro_pagos_diarios rpd JOIN public.usuario_obleista uo ON rpd.obleista_id = uo.id GROUP BY uo.id, uo.nombre", nativeQuery = true)
