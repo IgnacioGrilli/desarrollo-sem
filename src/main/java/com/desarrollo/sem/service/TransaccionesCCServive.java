@@ -14,7 +14,7 @@ public interface TransaccionesCCServive extends JpaRepository<TransaccionesCC, L
 
   //busca las transacciones de un usuario 
   @Query(value = "SELECT NEW com.desarrollo.sem.service.TransaccionDTO (p.id, p.montoTransaccion, p.fecha, p.hora)"+
-  " FROM TransaccionesCC p WHERE p.cuenta.mail = ?1")
+  " FROM TransaccionesCC p WHERE p.cuenta.mail = ?1 ORDER BY p.fecha DESC")
   List<TransaccionDTO> getTransaccionesUsuario(String mail);
 
 
